@@ -24,25 +24,25 @@ const capitalized = (string) => string[0].toUpperCase() + string.slice(1).toLowe
 
 app.locals.title = `${capitalized(projectName)}- Generated with IronGenerator`;
 
-// const session = require("express-session");
-// const MongoStore = require("connect-mongo")(session);
-// const mongoose = require("mongoose");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+const mongoose = require("mongoose");
 
 
-// app.use(
-//   session({
-//     secret: "logedUser",
-//     saveUninitialized: false,
-//     resave: false,
-//     coockie: {
-//       maxAge: 60 * 60 * 24 * 1000, 
-//     },
-//     store: new MongoStore({
-//       mongooseConnection: mongoose.connection,
-//       ttl: 24 * 60 * 60,
-//     }),
-//   })
-//   )
+app.use(
+  session({
+    secret: "logedUser",
+    saveUninitialized: false,
+    resave: false,
+    coockie: {
+      maxAge: 60 * 60 * 24 * 1000, 
+    },
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      ttl: 24 * 60 * 60,
+    }),
+  })
+  )
 
 // 👇 Start handling routes here
 const index = require("./routes/index");
