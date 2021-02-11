@@ -6,5 +6,6 @@ router.get('/', (req, res, next) => {
 });
 
 let nora = 'hola';
+console.log(nora);
 
 module.exports = router;
