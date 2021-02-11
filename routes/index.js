@@ -1,9 +1,10 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
 /* GET home page */
-router.get("/", (req, res, next) => {
-  res.render("index");
+router.get('/', (req, res, next) => {
+  res.render('index');
 });
-kujghgjhg
+
+let nora = 'holaaaaa';
 
 module.exports = router;
