@@ -5,6 +5,6 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
-let nora = 'adios';
+let nora = 'adiossss';
 
 module.exports = router;
