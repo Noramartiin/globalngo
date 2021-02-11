@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 require('../db/index.js');
 const Ngo = require('../models/Ngo.model.js');
 
-Ngo.insertMany([{}, {}, {}, {}])
+Ngo.insertMany([])
   .then(() => {
     mongoose.connection.close();
   })

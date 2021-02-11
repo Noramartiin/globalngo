@@ -12,7 +12,7 @@ const NgoSchema = new Schema({
     required: true,
   },
   images: {
-    type: Schema.Types.ObjectId,
+    type: String,
     required: true,
   },
   url: String,
