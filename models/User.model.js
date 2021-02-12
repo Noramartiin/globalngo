@@ -14,10 +14,12 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  ngo: {
-    type: Schema.Types.ObjectId,
-    ref: 'Ngo',
-  },
+  ngo: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Ngo',
+    },
+  ],
 });
 
 //USER MODEL

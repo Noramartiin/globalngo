@@ -20,3 +20,4 @@ Ngo.insertMany([
   .catch(err => {
     console.log('The USERS have not been upload');
   });
+  
