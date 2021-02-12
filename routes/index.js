@@ -1,10 +1,11 @@
-const router = require('express').Router();
-const bcrypt = require('bcryptjs');
-const UserModel = require('../models/User.model.js');
+const router = require("express").Router();
+const UserModel = require("../models/User.model.js");
+const bcrypt = require("bcryptjs");
+const { render } = require("../app.js");
 
 /* GET home page */
-router.get('/', (req, res, next) => {
-  res.render('index');
+router.get("/", (req, res, next) => {
+  res.render("index");
 });
 
 //SIGNIN PAGE
@@ -93,12 +94,12 @@ router.get('/profile', (req, res, next) => {
   res.render('profile.hbs');
 });
 
-//ONGS
+// ONGS
 // router.get('/ngos', (req, res, next) => {
 //   res.render('ngos.hbs');
 // });
 
-//SIGNUP
+// PROFILE
 
 // router.get("/profile", (req, res, next) => {
 //   res.render("profile.hbs");
