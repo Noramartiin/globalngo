@@ -7,24 +7,38 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
-//SIGNIN
-router.get('/signin', (req, res, next) => {
-  res.render('auth/signin.hbs');
+//SIGNIN PAGE
+router.get('/signup', (req, res, next) => {
+  res.render('auth/signup.hbs');
+});
+router.post('/signup', (req, res, next) => {
+  const { name, email, password } = req.body;
+  if (!name || !email | !password) {
+    res.render('auth/signup', { msg: 'Please enter all fields' });
+    return;
+  }
+  let re = /\S+@\S+\.\S+/;
+  if (!re.test(email)) {
+    res.render('auth/signup', { msg: 'Email not valid' });
+  }
+  let salt = bcrypt.genSaltSync(10);
+  let hash = bcrypt.hashSync(password, salt);
+  UserModel.create({ name, email, password: hash })
+    .then(() => {
+      res.redirect('/profile');
+    })
+    .catch(err => {
+      next(err);
+    });
 });
 
-//LOG IN
+//LOG IN PAGE
 router.get('/login', (req, res, next) => {
   res.render('auth/login.hbs');
 });
-
-//ONGS
-// router.get('/ngos', (req, res, next) => {
-//   res.render('ngos.hbs');
-// });
-
 router.post('/login', (req, res, next) => {
   const { email, password } = req.body;
-  UserModel.findOne()
+  UserModel.findOne({ email })
     .then(result => {
       if (result) {
         bcrypt
@@ -50,6 +64,16 @@ router.post('/login', (req, res, next) => {
       next(err);
     });
 });
+
+//PROFILE PAGE
+router.get('/profile', (req, res, next) => {
+  res.render('profile.hbs');
+});
+
+//ONGS
+// router.get('/ngos', (req, res, next) => {
+//   res.render('ngos.hbs');
+// });
 
 //SIGNUP
 
