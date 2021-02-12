@@ -12,20 +12,39 @@ router.get('/signup', (req, res, next) => {
   res.render('auth/signup.hbs');
 });
 router.post('/signup', (req, res, next) => {
+  //get data from the form
   const { name, email, password } = req.body;
+  // checking if all the require inputs are completed
   if (!name || !email | !password) {
     res.render('auth/signup', { msg: 'Please enter all fields' });
     return;
   }
+  // validation email sintax
   let re = /\S+@\S+\.\S+/;
   if (!re.test(email)) {
     res.render('auth/signup', { msg: 'Email not valid' });
   }
+  // encrypting password
   let salt = bcrypt.genSaltSync(10);
   let hash = bcrypt.hashSync(password, salt);
-  UserModel.create({ name, email, password: hash })
-    .then(() => {
-      res.redirect('/profile');
+  //check if email is already used
+  UserModel.findOne({ email })
+    .then(result => {
+      if (result) {
+        res.render('auth/signup', {
+          msg: 'Email already in use, choose another one',
+        });
+      } else {
+        //creating the user in the DB
+        UserModel.create({ name, email, password: hash })
+          .then(() => {
+            res.redirect('/profile');
+          })
+          .catch(err => {
+            next(err);
+          });
+      }
+      run;
     })
     .catch(err => {
       next(err);
@@ -37,10 +56,14 @@ router.get('/login', (req, res, next) => {
   res.render('auth/login.hbs');
 });
 router.post('/login', (req, res, next) => {
+  //getting data from the form
   const { email, password } = req.body;
+  // finding the user in the DB
   UserModel.findOne({ email })
     .then(result => {
+      //checking if the email is in the DB
       if (result) {
+        //comparing password with the encrypted password in DB
         bcrypt
           .compare(password, result.password)
           .then(matches => {
