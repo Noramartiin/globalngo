@@ -4,12 +4,12 @@ const Ngo = require('../models/User.model.js');
 
 Ngo.insertMany([
   {
-    username: 'Alvaro',
+    name: 'Alvaro',
     password: 1234,
     email: 'a@a.a',
   },
   {
-    username: 'Nora',
+    name: 'Nora',
     password: 1234,
     email: 'n@n.n',
   },
@@ -20,4 +20,3 @@ Ngo.insertMany([
   .catch(err => {
     console.log('The USERS have not been upload');
   });
-  
