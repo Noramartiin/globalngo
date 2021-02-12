@@ -1,11 +1,11 @@
-const router = require("express").Router();
-const UserModel = require("../models/User.model.js");
-const bcrypt = require("bcryptjs");
-const { render } = require("../app.js");
+const router = require('express').Router();
+const UserModel = require('../models/User.model.js');
+const bcrypt = require('bcryptjs');
+const { render } = require('../app.js');
 
 /* GET home page */
-router.get("/", (req, res, next) => {
-  res.render("index");
+router.get('/', (req, res, next) => {
+  res.render('index');
 });
 
 //SIGNIN PAGE
