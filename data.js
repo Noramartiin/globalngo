@@ -4,7 +4,7 @@
     information:'The Plastic Ocean Foundation UK is a UK Registered Charity, started by Jo Ruxton and Sonjia Norman in 2009. Jo had previously worked for WWF in Hong Kong, where she had met Sonjia and subsequently as a film producer for the BBC’s Natural History Unit. Sonjia had always been an ardent environmentalist and living in Hong Kong she had seen first hand the damage our modern lifestyle was doing to the ocean environment. Plastic Oceans produced the ground-breaking film “A Plastic Ocean" in 2017 and is contributing its bespoke curriculum education material which it is continually developing (including translations) to support education outreach in partner countries. ',
     images: 'https://plasticoceans.uk/wp-content/uploads/2019/07/Logo_03-e1563381646554.jpg',
     url: 'https://plasticoceans.uk/',
-    key:'enviroment' 
+    key:'environment' 
   },
   {
     name:'Friends of Animals',
