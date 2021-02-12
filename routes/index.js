@@ -1,53 +1,78 @@
 const router = require("express").Router();
-// const bcrypt = require("bcryptjs");
+const UserModel = require("../models/User.model.js");
+const bcrypt = require("bcryptjs");
+const { render } = require("../app.js");
 
 /* GET home page */
-router.get('/', (req, res, next) => {
-  res.render('index');
+router.get("/", (req, res, next) => {
+  res.render("index");
 });
 
 //ONGS
-router.get('/ngos', (req, res, next) => {
-  res.render('ngos.hbs');
+router.get("/ngos", (req, res, next) => {
+  res.render("ngos.hbs");
 });
 
 //LOG IN
 
-router.get('/login', (req, res, next) => {
-  res.render('auth/login.hbs');
+router.get("/login", (req, res, next) => {
+  res.render("auth/login.hbs");
 });
 
-// router.post('/login', (req, res,next)=>{
-//     const{userName, password}= req.body
-//     .then((response)=>{
-//       if(response){
-//           bcrypt.compare(password, response.password)
+router.post("/login", (req, res, next) => {
+  const { email, password } = req.body;
+  UserModel.findOne({email})
+    .then((response) => {
+      if (response) {
+        bcrypt
+          .compare(password, response.password)
 
-//         .then((matches)=>{
-//           if(matches){
-//             req.session.logedUser= response;
-//             // res.redirect('/')
-//           }
-//           else{
-//             res.render('login.hbs', {msg:'Password dont match, try again'})
-//           }
-//       })
-//       }
-//       else{
-//         res.render("login.hbs", { msg: "Username does not exist" });
-//       }
-//     })
-//     .catch((error)=>{
-//       next(error)
-//     })
-
-// })
+          .then((matches) => {
+            if (matches) {
+              // req.session.logedUser= response;
+              res.redirect("/profile");
+            } else {
+              res.render("auth/login.hbs", {
+                msg: "Password dont match, try again",
+              });
+            }
+          })
+          .catch((error) => {
+            next(error);
+          });
+      } else {
+        res.render("login.hbs", { msg: "Name does not exist" });
+      }
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
 
 //SIGNUP
 
-router.get('/signin', (req, res, next) => {
-  res.render('auth/signin.hbs');
+router.get("/signup", (req, res, next) => {
+  res.render("auth/signup.hbs");
 });
+
+router.post('/signup',(req,res,next)=>{
+   const { name,email, password } = req.body;
+
+   if(!name||!email||!password){
+     res.render('auth/signup',{msg:'Please enter all the fields'})
+     return
+   }
+     let salt = bcrypt.genSaltSync(10);
+     let hash = bcrypt.hashSync(password, salt);
+     UserModel.create({ name, email, password: hash })
+       .then(() => {
+         res.redirect("/");
+       })
+       .catch((error) => {
+         next(error);
+       });
+
+})
 router.get("/profile", (req, res, next) => {
   res.render("profile.hbs");
 });

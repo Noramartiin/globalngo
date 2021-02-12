@@ -11,10 +11,12 @@ const NgoSchema = new Schema({
     type: String,
     required: true,
   },
-  images: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
+  images: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
   url: String,
   key: {
     type: String,
