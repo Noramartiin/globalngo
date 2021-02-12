@@ -9,75 +9,74 @@ router.get("/", (req, res, next) => {
 });
 
 //SIGNIN PAGE
-router.get('/signup', (req, res, next) => {
-  res.render('auth/signup.hbs');
+router.get("/signup", (req, res, next) => {
+  res.render("auth/signup.hbs");
 });
-router.post('/signup', (req, res, next) => {
+router.post("/signup", (req, res, next) => {
   const { name, email, password } = req.body;
   if (!name || !email | !password) {
-    res.render('auth/signup', { msg: 'Please enter all fields' });
+    res.render("auth/signup", { msg: "Please enter all fields" });
     return;
   }
   let re = /\S+@\S+\.\S+/;
   if (!re.test(email)) {
-    res.render('auth/signup', { msg: 'Email not valid' });
+    res.render("auth/signup", { msg: "Email not valid" });
   }
   let salt = bcrypt.genSaltSync(10);
   let hash = bcrypt.hashSync(password, salt);
   UserModel.create({ name, email, password: hash })
     .then(() => {
-      res.redirect('/profile');
+      res.redirect("/profile");
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
 
 //LOG IN PAGE
-router.get('/login', (req, res, next) => {
-  res.render('auth/login.hbs');
+router.get("/login", (req, res, next) => {
+  res.render("auth/login.hbs");
 });
-router.post('/login', (req, res, next) => {
+router.post("/login", (req, res, next) => {
   const { email, password } = req.body;
   UserModel.findOne({ email })
-    .then(result => {
+    .then((result) => {
       if (result) {
         bcrypt
           .compare(password, result.password)
-          .then(matches => {
+          .then((matches) => {
             if (matches) {
               req.session.logedUser = result;
-              res.redirect('/profile');
+              res.redirect("/profile");
             } else {
-              res.render('auth/login.hbs', {
-                msg: 'Password dont match, try again',
+              res.render("auth/login.hbs", {
+                msg: "Password dont match, try again",
               });
             }
           })
-          .catch(err => {
+          .catch((err) => {
             next(err);
           });
       } else {
-        res.render('login.hbs', { msg: 'Email does not exist' });
+        res.render("login.hbs", { msg: "Email does not exist" });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
-
 
 const checkLogedInUser = (req, res, next) => {
   if (req.session.logedUser) {
     next();
   } else {
-    res.redirect("/login");
+    res.redirect("/");
   }
 };
 
 //PROFILE PAGE
-router.get('/profile', checkLogedInUser, (req, res, next) => {
-  res.render('profile.hbs');
+router.get("/profile", checkLogedInUser, (req, res, next) => {
+  res.render("profile.hbs");
 });
 
 // ONGS
