@@ -94,7 +94,7 @@ const checkLogedInUser = (req, res, next) => {
   if (req.session.logedUser) {
     next();
   } else {
-    res.redirect("/login");
+    res.redirect("/");
   }
 };
 
