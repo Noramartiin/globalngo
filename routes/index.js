@@ -46,7 +46,7 @@ router.post('/login', (req, res, next) => {
           .compare(password, result.password)
           .then(matches => {
             if (matches) {
-              // req.session.logedUser = response;
+              req.session.logedUser = result;
               res.redirect('/profile');
             } else {
               res.render('auth/login.hbs', {
@@ -66,8 +66,17 @@ router.post('/login', (req, res, next) => {
     });
 });
 
+
+const checkLogedInUser = (req, res, next) => {
+  if (req.session.logedUser) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
+};
+
 //PROFILE PAGE
-router.get('/profile', (req, res, next) => {
+router.get('/profile', checkLogedInUser, (req, res, next) => {
   res.render('profile.hbs');
 });
 
@@ -81,5 +90,10 @@ router.get('/profile', (req, res, next) => {
 // router.get("/profile", (req, res, next) => {
 //   res.render("profile.hbs");
 // });
+
+router.get("/logout", (req, res, next) => {
+  req.session.destroy();
+  res.redirect("/");
+});
 
 module.exports = router;
