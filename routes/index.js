@@ -39,7 +39,7 @@ router.post('/signup', (req, res, next) => {
       } else {
         //creating the user in the DB
         UserModel.create({ name, email, password: hash })
-          .then(() => {
+          .then(result => {
             res.redirect('/profile');
           })
           .catch(err => {
@@ -71,7 +71,7 @@ router.post('/login', (req, res, next) => {
           .then(matches => {
             if (matches) {
               req.session.logedUser = result;
-              res.redirect('/profile');
+              res.redirect('/profile/' + result._id);
             } else {
               res.render('auth/login.hbs', {
                 msg: 'Password dont match, try again',
@@ -90,21 +90,35 @@ router.post('/login', (req, res, next) => {
     });
 });
 
+//CREATE NEW NGO
+router.get('/new-ngo/:id', (req, res, next) => {
+  let id = req.params.id;
+  UserModel.findById(id)
+    .then(result => {
+      console.log(result);
+      res.render('new-ngo.hbs', { result });
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+router.post('/new-ngo/:id', (req, res, next) => {});
+
 const checkLogedInUser = (req, res, next) => {
   if (req.session.logedUser) {
     next();
   } else {
-    res.redirect('/login');
+    res.redirect('/profile/' + result._id);
   }
 };
 
 //PROFILE PAGE
 router.get('/profile/:id', checkLogedInUser, (req, res, next) => {
   let id = req.params.id;
-  UserModel.findById({ _id: id })
-    .then(result => {
-      console.log(result);
-      res.render('profile.hbs', { result });
+  UserModel.findById(id)
+    .then(profileInfo => {
+      console.log(profileInfo);
+      res.render('profile.hbs', { profileInfo });
     })
     .catch(err => {
       next(err);
