@@ -94,7 +94,7 @@ const checkLogedInUser = (req, res, next) => {
   if (req.session.logedUser) {
     next();
   } else {
-    res.redirect('/');
+    res.redirect('/login');
   }
 };
 
@@ -102,6 +102,7 @@ const checkLogedInUser = (req, res, next) => {
 router.get('/profile', checkLogedInUser, (req, res, next) => {
   res.render('profile.hbs');
 });
+
 
 // ONGS PAGE
 router.get('/ngos', (req, res, next) => {
@@ -114,7 +115,7 @@ router.get('/ngos', (req, res, next) => {
     });
 });
 
-// ONG INFO PAGe
+// ONG INFO PAGE
 router.get('/ngo-info/:id', (req, res, next) => {
   let id = req.params.id;
   NGOModel.findById({ _id: id })

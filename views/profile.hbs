@@ -1,1 +1,10 @@
 <h1>Profile</h1>
+<h2>My info</h2>
+{{#each result}}
+  <h3>{{this.name}}</h3>
+  <p>Email: {{this.email}}</p>
+  <p>Password: {{this.password}}</p>
+
+  <a href="/profile/:id/edit-profile">Edit profile:</a>
+  <a href="/profile/:id/delete-profile">Delete profile:</a>
+{{/each}}
