@@ -85,7 +85,7 @@ router.get("/profile", checkLogedInUser, (req, res, next) => {
 router.get("/ngos", (req, res, next) => {
   NGOModel.find()
     .then((data) => {
-      res.render("ngos", { data });
+      res.render("ngos.hbs", { data });
     })
     .catch((error) => {
       next(error);
@@ -94,7 +94,7 @@ router.get("/ngos", (req, res, next) => {
 
 //DONATE
 router.get("/donate", (req, res, next) => {
-  res.render("donate.hbs");
+  res.render("donate");
 });
 
 STRIPE;
