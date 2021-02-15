@@ -1,10 +1,32 @@
 <h1>Profile</h1>
 <h2>My info</h2>
-{{#each result}}
-  <h3>{{this.name}}</h3>
-  <p>Email: {{this.email}}</p>
-  <p>Password: {{this.password}}</p>
+{{!-- {{#with result}} --}}
+  <h4>Name: {{result.name}}</h3>
+  <h4>Email: {{result.email}}</h4>
+  <h4>Password: **** </h4>
+{{!-- {{/with}} --}}
+<div>
+  <p>Edit your information</p>
+  {{!-- {{#with result}} --}}
+    <form action="/profile/{{result._id}}" method="POST">
+      <label>Full name:</label>
+      <input name="newName" type="text" value="{{result.name}}" placeholder="{{result.name}}">
+      <br>
+      <label>Your email:</label>
+      <input name="newEmail" type="email" value="{{result.email}}">
+      <br>
+      <label>Password:</label>
+      <input name="newPassword" type="password" value="****">
+      <br>
+      <button type="submit">Change</button>
+    </form>
+  {{!-- {{/with}} --}}
+</div>
+<div>
+  <p>Delete your account</p>
+  <div>
+    <p>You are going to delete all your information and the NGOs you have created, BE SURE OF THAT CHAMP!</p>
+    <a href="/profile/{{_id}}/delete">Delete</a>
+  </div>
+</div>
 
-  <a href="/profile/:id/edit-profile">Edit profile:</a>
-  <a href="/profile/:id/delete-profile">Delete profile:</a>
-{{/each}}

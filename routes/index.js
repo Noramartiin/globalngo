@@ -57,6 +57,7 @@ router.post('/signup', (req, res, next) => {
 router.get('/login', (req, res, next) => {
   res.render('auth/login.hbs');
 });
+
 router.post('/login', (req, res, next) => {
   //getting data from the form
   const { email, password } = req.body;
@@ -71,7 +72,7 @@ router.post('/login', (req, res, next) => {
           .then(matches => {
             if (matches) {
               req.session.logedUser = result;
-              res.redirect('/profile');
+              res.redirect("/profile/"+ result._id);
             } else {
               res.render('auth/login.hbs', {
                 msg: 'Password dont match, try again',
@@ -99,8 +100,15 @@ const checkLogedInUser = (req, res, next) => {
 };
 
 //PROFILE PAGE
-router.get('/profile', checkLogedInUser, (req, res, next) => {
-  res.render('profile.hbs');
+router.get('/profile/:id', checkLogedInUser, (req, res, next) => {
+  let id = req.params.id;
+  UserModel.findById(id)
+    .then(result => {
+      res.render('profile.hbs', { result});
+    })
+    .catch(err => {
+      next(err);
+    });
 });
 
 
