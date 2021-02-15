@@ -1,1 +1,32 @@
 <h1>Profile</h1>
+<h2>My info</h2>
+{{#each result}}
+  <h4>Name: {{this.name}}</h3>
+  <h4>Mail: {{this.email}}</h4>
+  <h4>Password: **** </h4>
+{{/each}}
+<div>
+  <p>Edit your information</p>
+  {{#each result}}
+    <form action="/profile/{{_id}}" method="POST">
+      <label>Full name:</label>
+      <input name="newName" type="text" value="{{this.name}}">
+      <br>
+      <label>Your email:</label>
+      <input name="newEmail" type="email" value="{{this.email}}">
+      <br>
+      <label>Password:</label>
+      <input name="newPassword" type="password" value="****">
+      <br>
+      <button type="submit">Change</button>
+    </form>
+  {{/each}}
+</div>
+<div>
+  <p>Delete your account</p>
+  <div>
+    <p>You are going to delete all your information and the NGOs you have created, BE SURE OF THAT CHAMP!</p>
+    <a href="/profile/{{_id}}/delete">Delete</a>
+  </div>
+</div>
+

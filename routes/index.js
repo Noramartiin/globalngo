@@ -94,13 +94,21 @@ const checkLogedInUser = (req, res, next) => {
   if (req.session.logedUser) {
     next();
   } else {
-    res.redirect('/');
+    res.redirect('/login');
   }
 };
 
 //PROFILE PAGE
-router.get('/profile', checkLogedInUser, (req, res, next) => {
-  res.render('profile.hbs');
+router.get('/profile/:id', checkLogedInUser, (req, res, next) => {
+  let id = req.params.id;
+  UserModel.findById({ _id: id })
+    .then(result => {
+      console.log(result);
+      res.render('profile.hbs', { result });
+    })
+    .catch(err => {
+      next(err);
+    });
 });
 
 // ONGS PAGE
