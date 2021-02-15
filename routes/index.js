@@ -114,6 +114,18 @@ router.get('/ngos', (req, res, next) => {
     });
 });
 
+// ONG INFO PAGe
+router.get('/ngo-info/:id', (req, res, next) => {
+  let id = req.params.id;
+  NGOModel.findById({ id })
+    .then(result => {
+      res.render('ngo-info.hbs', { result });
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
 //DONATE
 router.get('/donate', (req, res, next) => {
   res.render('donate.hbs');

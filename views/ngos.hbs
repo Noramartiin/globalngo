@@ -1,1 +1,9 @@
 <h1>NGOS INFO</h1>
+{{#each data}}
+  <a href="/ngo-info/:?">
+    <img src="{{this.images.[0]}}" >
+    <h3>{{this.name}}</h3>
+  </a>
+{{/each}}
+
+ <a href="/profile"><button>DONATE</button></a>
