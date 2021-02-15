@@ -1,7 +1,34 @@
 document.addEventListener(
-  "DOMContentLoaded",
+  'DOMContentLoaded',
   () => {
-    console.log("globalONG JS imported successfully!");
+    let editInformation = document.querySelector('.edit-profile');
+    let formInformation = document.querySelector('.form-modify');
+    let deleteInformation = document.querySelector('.delete-profile');
+    let divDelete = document.querySelector('.div-delete');
+    let editNgos = document.querySelector('.delete-profile');
+    let divNgos = document.querySelector('.div-delete');
+
+    editInformation.addEventListener('click', () => {
+      if (formInformation.style.display == 'none') {
+        formInformation.style.display = 'block';
+      } else {
+        formInformation.style.display = 'none';
+      }
+    });
+    deleteInformation.addEventListener('click', () => {
+      if (divDelete.style.display == 'none') {
+        divDelete.style.display = 'block';
+      } else {
+        divDelete.style.display = 'none';
+      }
+    });
+    editNgos.addEventListener('click', () => {
+      if (divNgos.style.display == 'none') {
+        divNgos.style.display = 'block';
+      } else {
+        divNgos.style.display = 'none';
+      }
+    });
   },
   false
 );

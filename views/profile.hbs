@@ -1,32 +1,41 @@
 <h1>Profile</h1>
 <h2>My info</h2>
-{{!-- {{#with result}} --}}
-  <h4>Name: {{result.name}}</h3>
-  <h4>Email: {{result.email}}</h4>
+
+  <h4>Name: {{profileInfo.name}}</h3>
+  <h4>Mail: {{profileInfo.email}}</h4>
   <h4>Password: **** </h4>
-{{!-- {{/with}} --}}
+
 <div>
-  <p>Edit your information</p>
-  {{!-- {{#with result}} --}}
-    <form action="/profile/{{result._id}}" method="POST">
+  <p class="edit-profile" href="">Edit your information</p>
+  
+    <form class="form-modify" action="/profile/{{profileInfo._id}}" method="POST">
       <label>Full name:</label>
-      <input name="newName" type="text" value="{{result.name}}" placeholder="{{result.name}}">
+      <input name="newName" type="text" value="{{profileInfo.name}}">
       <br>
       <label>Your email:</label>
-      <input name="newEmail" type="email" value="{{result.email}}">
+      <input name="newEmail" type="email" value="{{profileInfo.email}}">
       <br>
       <label>Password:</label>
       <input name="newPassword" type="password" value="****">
       <br>
       <button type="submit">Change</button>
     </form>
-  {{!-- {{/with}} --}}
+  
 </div>
 <div>
-  <p>Delete your account</p>
-  <div>
+  <p class="delete-profile">Delete your account</p>
+  <div class="div-delete">
     <p>You are going to delete all your information and the NGOs you have created, BE SURE OF THAT CHAMP!</p>
-    <a href="/profile/{{_id}}/delete">Delete</a>
+    <a href="/profile/{{profileInfo._id}}/delete">Delete</a>
   </div>
 </div>
+
+<div>
+  <p class="modify-ngos">Your NGOs</p>
+  <div class="div-ngos">
+  <a href="">Edit your NGOs</a>
+  </div>
+</div>
+
+<a href="/new-ngo/{{profileInfo._id}}">Creat new NGO</a>
 
