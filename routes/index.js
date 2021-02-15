@@ -92,18 +92,19 @@ router.get("/ngos", (req, res, next) => {
     });
 });
 
+
+
 //DONATE
 router.get("/donate", (req, res, next) => {
-  res.render("donate");
+  res.render("donate.hbs");
 });
 
-STRIPE;
-stripe.customers
-  .create({
-    email: "customer@example.com",
-  })
-  .then((customer) => console.log(customer.id))
-  .catch((error) => console.error(error));
+// //STRIPE
+// stripe.customers.create({
+//     email: "customer@example.com",
+//   })
+//   .then((customer) => console.log(customer.id))
+//   .catch((error) => console.error(error));
 
 router.get("/logout", (req, res, next) => {
   req.session.destroy();

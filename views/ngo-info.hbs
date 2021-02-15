@@ -1,9 +1,9 @@
-<h1>NGOS </h1>
+<h1>NGOS INFO</h1>
 {{#each data}}
-<a href="/ngo-info">
+  <h2>{{this.key}}</h2>
   <h3>{{this.name}}</h3>
   <img src="{{this.images.[0]}}" >
- </a>
+  <p>{{this.information}}</p>
 {{/each}}
 
  <a href="/profile"><button>DONATE</button></a>
