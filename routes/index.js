@@ -95,14 +95,23 @@ router.get('/new-ngo/:id', (req, res, next) => {
   let id = req.params.id;
   UserModel.findById(id)
     .then(result => {
-      console.log(result);
       res.render('new-ngo.hbs', { result });
     })
     .catch(err => {
       next(err);
     });
 });
-router.post('/new-ngo/:id', (req, res, next) => {});
+router.post('/new-ngo/:id', (req, res, next) => {
+  let id = req.params.id;
+  const { name, information, images, url, key } = req.body;
+  NGOModel.create({ name, information, images, url, key, owner: id })
+    .then(() => {
+      res.redirect('../profile/' + id);
+    })
+    .catch(err => {
+      next(err);
+    });
+});
 
 const checkLogedInUser = (req, res, next) => {
   if (req.session.logedUser) {
@@ -117,8 +126,14 @@ router.get('/profile/:id', checkLogedInUser, (req, res, next) => {
   let id = req.params.id;
   UserModel.findById(id)
     .then(profileInfo => {
-      console.log(profileInfo);
-      res.render('profile.hbs', { profileInfo });
+      NGOModel.find({ owner: id })
+        .then(result => {
+          console.log(result);
+          res.render('profile.hbs', { profileInfo, result });
+        })
+        .catch(err => {
+          next(err);
+        });
     })
     .catch(err => {
       next(err);

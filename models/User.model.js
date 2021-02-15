@@ -15,12 +15,6 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
-  ngo: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Ngo',
-    },
-  ],
 });
 
 //USER MODEL

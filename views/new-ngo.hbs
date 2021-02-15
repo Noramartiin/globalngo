@@ -1,19 +1,19 @@
 <h1>Hello {{result.name}}, you are creatings new NGO</h1>
 <form action="/new-ngo/{{result._id}}" method="POST">
     <label>Name</label>
-    <input name="name" type="email" placeholder="johndoe@ngo.com">
+    <input name="name" type="text" placeholder="johndoe@ngo.com">
     <br>
     <label>Description:</label>
-    <input name="information" type="password" placeholder="Your Password">
+    <input name="information" type="text" placeholder="Your Password">
     <br>
     <label>Image:</label>
-    <input name="images" type="password" placeholder="Your Password">
+    <input name="images" type="text" placeholder="Your Password">
     <br>
     <label>Web-site:</label>
-    <input name="url" type="password" placeholder="Your Password">
+    <input name="url" type="text" placeholder="Your Password">
     <br>
     <label>Category:</label>
-    <input name="key" type="password" placeholder="Your Password">
+    <input name="key" type="text" placeholder="Your Password">
     <br>
 
     <button type="submit">Create new NGO</button>

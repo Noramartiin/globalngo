@@ -17,11 +17,16 @@ const NgoSchema = new Schema({
       required: true,
     },
   ],
+
   url: String,
   key: {
     type: String,
     required: true,
     enum: ['environment', 'animals', 'health', 'education'],
+  },
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
 });
 
