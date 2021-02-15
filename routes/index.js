@@ -13,6 +13,7 @@ router.get('/', (req, res, next) => {
 router.get('/signup', (req, res, next) => {
   res.render('auth/signup.hbs');
 });
+//FIXME:
 router.post('/signup', (req, res, next) => {
   //get data from the form
   const { name, email, password } = req.body;
@@ -40,13 +41,12 @@ router.post('/signup', (req, res, next) => {
         //creating the user in the DB
         UserModel.create({ name, email, password: hash })
           .then(result => {
-            res.redirect('/profile');
+            res.redirect('/profile'); //FIXME:
           })
           .catch(err => {
             next(err);
           });
       }
-      run;
     })
     .catch(err => {
       next(err);
@@ -90,29 +90,7 @@ router.post('/login', (req, res, next) => {
     });
 });
 
-//CREATE NEW NGO
-router.get('/new-ngo/:id', (req, res, next) => {
-  let id = req.params.id;
-  UserModel.findById(id)
-    .then(result => {
-      res.render('new-ngo.hbs', { result });
-    })
-    .catch(err => {
-      next(err);
-    });
-});
-router.post('/new-ngo/:id', (req, res, next) => {
-  let id = req.params.id;
-  const { name, information, images, url, key } = req.body;
-  NGOModel.create({ name, information, images, url, key, owner: id })
-    .then(() => {
-      res.redirect('../profile/' + id);
-    })
-    .catch(err => {
-      next(err);
-    });
-});
-
+//SETTING COOKIES
 const checkLogedInUser = (req, res, next) => {
   if (req.session.logedUser) {
     next();
@@ -125,15 +103,73 @@ const checkLogedInUser = (req, res, next) => {
 router.get('/profile/:id', checkLogedInUser, (req, res, next) => {
   let id = req.params.id;
   UserModel.findById(id)
-    .then(profileInfo => {
+    .then(result => {
       NGOModel.find({ owner: id })
-        .then(result => {
-          console.log(result);
-          res.render('profile.hbs', { profileInfo, result });
+        .then(resultngos => {
+          res.render('profile.hbs', { result, resultngos });
         })
         .catch(err => {
           next(err);
         });
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+//REVIEW:
+router.post('/profile/:id', checkLogedInUser, (req, res, next) => {
+  let id = req.params.id;
+  const { name, email, oldPassword, newPassword } = req.body;
+  UserModel.findOne({ _id: id }).then(result => {
+    bcrypt
+      .compare(oldPassword, result.password)
+      .then(matches => {
+        if (matches) {
+          UserModel.findByIdAndUpdate(
+            { _id: id },
+            { name, email, password: newPassword }
+          ).then(() => {
+            NGOModel.find({ owner: id }).then(resultngos => {
+              res.render('profile.hbs', {
+                result,
+                resultngos,
+                msg: 'You profile has been modified',
+              });
+            });
+          });
+        } else {
+          NGOModel.find({ owner: id }).then(resultngos => {
+            res.render('profile.hbs', {
+              result,
+              resultngos,
+              msg: 'You password does not match',
+            });
+          });
+        }
+      })
+      .catch(err => {
+        next(err);
+      });
+  });
+});
+
+//CREATE NEW NGO
+router.get('/new-ngo/:id', checkLogedInUser, (req, res, next) => {
+  let id = req.params.id;
+  UserModel.findById(id)
+    .then(result => {
+      res.render('new-ngo.hbs', { result });
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+router.post('/new-ngo/:id', checkLogedInUser, (req, res, next) => {
+  let id = req.params.id;
+  const { name, information, images, url, key } = req.body;
+  NGOModel.create({ name, information, images, url, key, owner: id })
+    .then(() => {
+      res.redirect('../profile/' + id);
     })
     .catch(err => {
       next(err);
@@ -151,7 +187,7 @@ router.get('/ngos', (req, res, next) => {
     });
 });
 
-// ONG INFO PAGe
+// ONG INFO PAGE
 router.get('/ngo-info/:id', (req, res, next) => {
   let id = req.params.id;
   NGOModel.findById({ _id: id })
