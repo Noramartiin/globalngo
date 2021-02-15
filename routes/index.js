@@ -9,21 +9,21 @@ router.get('/', (req, res, next) => {
 });
 
 //SIGNIN PAGE
-router.get("/signup", (req, res, next) => {
-  res.render("auth/signup.hbs");
+router.get('/signup', (req, res, next) => {
+  res.render('auth/signup.hbs');
 });
 router.post('/signup', (req, res, next) => {
   //get data from the form
   const { name, email, password } = req.body;
   // checking if all the require inputs are completed
   if (!name || !email | !password) {
-    res.render("auth/signup", { msg: "Please enter all fields" });
+    res.render('auth/signup', { msg: 'Please enter all fields' });
     return;
   }
   // validation email sintax
   let re = /\S+@\S+\.\S+/;
   if (!re.test(email)) {
-    res.render("auth/signup", { msg: "Email not valid" });
+    res.render('auth/signup', { msg: 'Email not valid' });
   }
   // encrypting password
   let salt = bcrypt.genSaltSync(10);
@@ -47,14 +47,14 @@ router.post('/signup', (req, res, next) => {
       }
       run;
     })
-    .catch((err) => {
+    .catch(err => {
       next(err);
     });
 });
 
 //LOG IN PAGE
-router.get("/login", (req, res, next) => {
-  res.render("auth/login.hbs");
+router.get('/login', (req, res, next) => {
+  res.render('auth/login.hbs');
 });
 router.post('/login', (req, res, next) => {
   //getting data from the form
@@ -67,24 +67,24 @@ router.post('/login', (req, res, next) => {
         //comparing password with the encrypted password in DB
         bcrypt
           .compare(password, result.password)
-          .then((matches) => {
+          .then(matches => {
             if (matches) {
               req.session.logedUser = result;
-              res.redirect("/profile");
+              res.redirect('/profile');
             } else {
-              res.render("auth/login.hbs", {
-                msg: "Password dont match, try again",
+              res.render('auth/login.hbs', {
+                msg: 'Password dont match, try again',
               });
             }
           })
-          .catch((err) => {
+          .catch(err => {
             next(err);
           });
       } else {
-        res.render("login.hbs", { msg: "Email does not exist" });
+        res.render('login.hbs', { msg: 'Email does not exist' });
       }
     })
-    .catch((err) => {
+    .catch(err => {
       next(err);
     });
 });
@@ -93,29 +93,29 @@ const checkLogedInUser = (req, res, next) => {
   if (req.session.logedUser) {
     next();
   } else {
-    res.redirect("/");
+    res.redirect('/');
   }
 };
 
 //PROFILE PAGE
-router.get("/profile", checkLogedInUser, (req, res, next) => {
-  res.render("profile.hbs");
+router.get('/profile', checkLogedInUser, (req, res, next) => {
+  res.render('profile.hbs');
 });
 
 // ONGS
-// router.get('/ngos', (req, res, next) => {
-//   res.render('ngos.hbs');
-// });
+router.get('/ngos', (req, res, next) => {
+  NGOModel.find()
+    .then(data => {
+      res.render('ngos.hbs', { data });
+    })
+    .catch(error => {
+      next(error);
+    });
+});
 
-// PROFILE
-
-// router.get("/profile", (req, res, next) => {
-//   res.render("profile.hbs");
-// });
-
-router.get("/logout", (req, res, next) => {
+router.get('/logout', (req, res, next) => {
   req.session.destroy();
-  res.redirect("/");
+  res.redirect('/');
 });
 
 module.exports = router;
