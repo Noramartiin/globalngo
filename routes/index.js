@@ -102,7 +102,7 @@ router.get('/profile', checkLogedInUser, (req, res, next) => {
   res.render('profile.hbs');
 });
 
-// ONGS
+// ONGS PAGE
 router.get('/ngos', (req, res, next) => {
   NGOModel.find()
     .then(data => {
@@ -113,6 +113,12 @@ router.get('/ngos', (req, res, next) => {
     });
 });
 
+//DONATE
+router.get('/donate', (req, res, next) => {
+  res.render('donate.hbs');
+});
+
+// LOG OUT PAGE
 router.get('/logout', (req, res, next) => {
   req.session.destroy();
   res.redirect('/');
