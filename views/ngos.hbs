@@ -1,6 +1,6 @@
 <h1>NGOS </h1>
 {{#each data}}
-  <a href="/ngo-info/:?">
+  <a href="/ngo-info/{{this._id}}">
     <img src="{{this.images.[0]}}" >
     <h3>{{this.name}}</h3>
   </a>
