@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const UserModel = require('../models/User.model.js');
+const NGOModel = require('../models/Ngo.model');
 const bcrypt = require('bcryptjs');
 const { render } = require('../app.js');
 
