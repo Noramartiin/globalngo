@@ -17,7 +17,8 @@
     "hbs": "^4.1.1",
     "mongoose": "^5.11.15",
     "morgan": "^1.10.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "stripe": "^8.135.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

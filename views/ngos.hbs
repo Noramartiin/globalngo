@@ -1,1 +1,9 @@
 <h1>NGOS INFO</h1>
+{{#each data}}
+<h2>{{this.key}}</h2>
+ <h3>{{this.name}}</h3>
+ <p>{{this.information}}</p>
+ <img src="{{this.images}}" >
+{{/each}}
+
+ <a href="/profile"><button>DONATE</button></a>

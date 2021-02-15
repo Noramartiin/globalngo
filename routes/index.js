@@ -1,7 +1,9 @@
 const router = require("express").Router();
 const UserModel = require("../models/User.model.js");
+const NGOModel = require("../models/Ngo.model.js");
 const bcrypt = require("bcryptjs");
 const { render } = require("../app.js");
+// const stripe = require("stripe");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -80,15 +82,27 @@ router.get("/profile", checkLogedInUser, (req, res, next) => {
 });
 
 // ONGS
-// router.get('/ngos', (req, res, next) => {
-//   res.render('ngos.hbs');
-// });
+router.get("/ngos", (req, res, next) => {
+  NGOModel.find()
+    .then((data) => {
+      res.render("ngos.hbs", { data });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
 
-// PROFILE
+//DONATE
+router.get("/donate", (req, res, next) => {
+  res.render("donate.hbs");
+});
 
-// router.get("/profile", (req, res, next) => {
-//   res.render("profile.hbs");
-// });
+//STRIPE
+// stripe.customers.create({
+//     email: "customer@example.com",
+//   })
+//   .then((customer) => console.log(customer.id))
+//   .catch((error) => console.error(error));
 
 router.get("/logout", (req, res, next) => {
   req.session.destroy();
