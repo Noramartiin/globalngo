@@ -85,7 +85,7 @@ router.get("/profile", checkLogedInUser, (req, res, next) => {
 router.get("/ngos", (req, res, next) => {
   NGOModel.find()
     .then((data) => {
-      res.render("ngos.hbs", { data });
+      res.render("ngos", { data });
     })
     .catch((error) => {
       next(error);
@@ -97,8 +97,9 @@ router.get("/donate", (req, res, next) => {
   res.render("donate.hbs");
 });
 
-STRIPE
-stripe.customers.create({
+STRIPE;
+stripe.customers
+  .create({
     email: "customer@example.com",
   })
   .then((customer) => console.log(customer.id))
