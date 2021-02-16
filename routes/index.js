@@ -245,7 +245,7 @@ router.post('/new-ngo/:id', (req, res, next) => {
     .then(ngo => {
       if (ngo) {
         console.log(ngo);
-        //FIXME: se quedan guardados los datos anteriores
+        //FIXME: se quedan guardados los datos anteriores NOTE: TODOS LOS RENDER
         res.render('new-ngo.hbs', { msg: 'This NGO already exists' });
       } else {
         NGOModel.create({ name, information, images, url, key, owner: id })
