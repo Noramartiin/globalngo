@@ -31,13 +31,14 @@
   <button class="delete-profile">Delete your account</button>
   <div class="div-delete">
     <p>You are going to delete all your information and the NGOs you have created, BE SURE OF THAT CHAMP!</p>
-    <a href="/profile/{{result._id}}/delete">Delete</a>
+    <a href="/delete-profile/{{result._id}}">Delete</a>
   </div>
 </div>
 
 <div>
   <button class="modify-ngos">Your NGOs</button>
   <div class="div-ngos">
+    <p>{{msgnongo}}</p>
     {{#each resultngos}}
       <img src="{{this.images.[0]}}" alt="img">
       <p>{{this.name}}</p>
