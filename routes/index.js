@@ -103,6 +103,7 @@ router.get("/new-ngo/:id", (req, res, next) => {
       next(err);
     });
 });
+
 router.post("/new-ngo/:id", (req, res, next) => {
   let id = req.params.id;
   const { name, information, images, url, key } = req.body;
