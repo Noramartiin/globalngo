@@ -184,23 +184,29 @@ router.post("/new-ngo/:id", (req, res, next) => {
     });
 });
 
-//EDIT PAGE
-router.get("/new-ngo/:id/edit", (req, res, next) => {
+//EDIT NGO
+router.get("/new-ngo/:id/:idNgo/edit", checkLogedInUser, (req, res, next) => {
   let id = req.params.id;
+  let idNgo = req.params.idNgo;
   // const { name, information, images, url, key } = req.body;
-  NGOModel.findById(id)
-    .then((result) => {
-      res.render("edit-ngo.hbs", { result });
-    })
-    .catch((error) => {
-      next(error);
-    });
+
+  UserModel.findById(id)
+  .then((uresult) => {
+    NGOModel.findById(idNgo)
+      .then((nresult) => {
+        res.render("edit-ngo.hbs", { uresult, nresult });
+      })
+      .catch((error) => {
+        next(error);
+      });
+  });
 });
 
-router.post("/new-ngo/:id/edit", (req, res, next) => {
+router.post("/new-ngo/:id/:idNgo/edit", (req, res, next) => {
   let id = req.params.id;
+  let idNgo = req.params.idNgo;
   const { name, information, images, url, key } = req.body;
-  NGOModel.findByIdAndUpdate(id)
+  NGOModel.findByIdAndUpdate(idNgo, req.body)
     .then(() => {
       res.redirect("/profile/" + id);
     })
@@ -209,14 +215,17 @@ router.post("/new-ngo/:id/edit", (req, res, next) => {
     });
 });
 
-router.post("/new-ngo/:id/delete", (req, res, next) => {
-  let id = req.params.id;
+//DELETE NGO
 
-  NGOModel.findByIdAndDelete(id)
+router.get("/new-ngo/:id/:idNgo/delete", (req, res, next) => {
+  let id = req.params.id;
+  let idNgo = req.params.idNgo;
+  NGOModel.findByIdAndDelete(idNgo)
     .then(() => {
       res.redirect("/profile/" + id);
     })
     .catch((error) => {
+      console.log(idNgo);
       next(error);
     });
 });

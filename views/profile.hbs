@@ -41,8 +41,8 @@
     {{#each resultngos}}
       <img src="{{this.images.[0]}}" alt="img">
       <p>{{this.name}}</p>
-      <a href="/new-ngo/{{this._id}}/edit">Edit</a>
-      <a href="">Delete</a>
+      <a href="/new-ngo/{{this.owner}}/{{this._id}}/edit">Edit</a>
+      <a href="/new-ngo/{{this.owner}}/{{this._id}}/delete">Delete</a>
       <br>
     {{/each}}
   </div>
