@@ -41,6 +41,7 @@ router.post('/signup', (req, res, next) => {
         //creating the user in the DB
         UserModel.create({ name, email, password: hash })
           .then(result => {
+            req.session.logedUser = result;
             res.redirect('/profile'); //FIXME:
           })
           .catch(err => {
@@ -91,6 +92,7 @@ router.post('/login', (req, res, next) => {
 });
 
 //SETTING COOKIES
+//REVIEW: validaciones
 const checkLogedInUser = (req, res, next) => {
   if (req.session.logedUser) {
     next();
@@ -100,13 +102,17 @@ const checkLogedInUser = (req, res, next) => {
 };
 
 //PROFILE PAGE
-router.get('/profile/:id', checkLogedInUser, (req, res, next) => {
+router.get('/profile/:id', (req, res, next) => {
   let id = req.params.id;
   UserModel.findById(id)
     .then(result => {
       NGOModel.find({ owner: id })
         .then(resultngos => {
-          res.render('profile.hbs', { result, resultngos });
+          if (resultngos) {
+            res.render('profile.hbs', { result, resultngos });
+          } else {
+            res.render('profile.hbs', { result });
+          }
         })
         .catch(err => {
           next(err);
@@ -117,7 +123,7 @@ router.get('/profile/:id', checkLogedInUser, (req, res, next) => {
     });
 });
 //REVIEW:
-router.post('/profile/:id', checkLogedInUser, (req, res, next) => {
+router.post('/profile/:id', (req, res, next) => {
   let id = req.params.id;
   const { name, email, oldPassword, newPassword } = req.body;
   UserModel.findOne({ _id: id }).then(result => {
@@ -154,7 +160,7 @@ router.post('/profile/:id', checkLogedInUser, (req, res, next) => {
 });
 
 //CREATE NEW NGO
-router.get('/new-ngo/:id', checkLogedInUser, (req, res, next) => {
+router.get('/new-ngo/:id', (req, res, next) => {
   let id = req.params.id;
   UserModel.findById(id)
     .then(result => {
@@ -164,7 +170,7 @@ router.get('/new-ngo/:id', checkLogedInUser, (req, res, next) => {
       next(err);
     });
 });
-router.post('/new-ngo/:id', checkLogedInUser, (req, res, next) => {
+router.post('/new-ngo/:id', (req, res, next) => {
   let id = req.params.id;
   const { name, information, images, url, key } = req.body;
   NGOModel.create({ name, information, images, url, key, owner: id })
