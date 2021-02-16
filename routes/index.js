@@ -40,9 +40,9 @@ router.post("/signup", (req, res, next) => {
       } else {
         //creating the user in the DB
         UserModel.create({ name, email, password: hash })
-          .then((result) => {
-             req.session.logedUser = result;
-            res.redirect("/profile/" + result._id);
+          .then(result => {
+            req.session.logedUser = result;
+            res.redirect('/profile'); //FIXME:
           })
           .catch((err) => {
             next(err);
@@ -90,6 +90,65 @@ router.post("/login", (req, res, next) => {
     .catch((err) => {
       next(err);
     });
+});
+
+
+//PROFILE PAGE
+router.get('/profile/:id', (req, res, next) => {
+  let id = req.params.id;
+  UserModel.findById(id)
+    .then(result => {
+      NGOModel.find({ owner: id })
+        .then(resultngos => {
+          if (resultngos) {
+            res.render('profile.hbs', { result, resultngos });
+          } else {
+            res.render('profile.hbs', { result });
+          }
+        })
+        .catch(err => {
+          next(err);
+        });
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+//REVIEW:
+router.post('/profile/:id', (req, res, next) => {
+  let id = req.params.id;
+  const { name, email, oldPassword, newPassword } = req.body;
+  UserModel.findOne({ _id: id }).then(result => {
+    bcrypt
+      .compare(oldPassword, result.password)
+      .then(matches => {
+        if (matches) {
+          UserModel.findByIdAndUpdate(
+            { _id: id },
+            { name, email, password: newPassword }
+          ).then(() => {
+            NGOModel.find({ owner: id }).then(resultngos => {
+              res.render('profile.hbs', {
+                result,
+                resultngos,
+                msg: 'You profile has been modified',
+              });
+            });
+          });
+        } else {
+          NGOModel.find({ owner: id }).then(resultngos => {
+            res.render('profile.hbs', {
+              result,
+              resultngos,
+              msg: 'You password does not match',
+            });
+          });
+        }
+      })
+      .catch(err => {
+        next(err);
+      });
+  });
 });
 
 //CREATE NEW NGO
@@ -174,7 +233,7 @@ router.get("/ngos", (req, res, next) => {
 });
 
 // ONG INFO PAGE
-router.get("/ngo-info/:id", (req, res, next) => {
+router.get('/ngo-info/:id', (req, res, next) => {
   let id = req.params.id;
   NGOModel.findById({ _id: id })
     .then((result) => {
