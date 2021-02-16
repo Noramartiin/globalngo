@@ -5,8 +5,8 @@ document.addEventListener(
     let formInformation = document.querySelector('.form-modify');
     let deleteInformation = document.querySelector('.delete-profile');
     let divDelete = document.querySelector('.div-delete');
-    let editNgos = document.querySelector('.delete-profile');
-    let divNgos = document.querySelector('.div-delete');
+    let editNgos = document.querySelector('.modify-ngos');
+    let divNgos = document.querySelector('.div-ngos');
 
     editInformation.addEventListener('click', () => {
       if (formInformation.style.display == 'none') {
