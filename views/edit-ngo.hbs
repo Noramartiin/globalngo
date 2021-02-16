@@ -2,19 +2,19 @@
 <h1>Hello {{result.name}}, you are editing a new NGO</h1>
 <form action="/new-ngo/{{result._id}}/edit" method="POST">
     <label>Name</label>
-    <input name="name" type="text" value={{this.name}}>
+    <input name="name" type="text" value={{result.name}}>
     <br>
     <label>Description:</label>
-    <input name="information" type="text" value={{this.information}}>
+    <input name="information" type="text" value={{result.information}}>
     <br>
     <label>Image:</label>
-    <input name="images" type="text" value={{this.images}}>
+    <input name="images" type="text" value={{result.images}}>
     <br>
     <label>Web-site:</label>
-    <input name="url" type="text" value={{this.url}}>
+    <input name="url" type="text" value={{result.url}}>
     <br>
     <label>Category:</label>
-    <input name="key" type="text" value={{this.key}}>
+    <input name="key" type="text" value={{result.key}}>
     <br>
 
     <button type="submit">Edit the NGO</button>
