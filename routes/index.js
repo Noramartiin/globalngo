@@ -13,7 +13,6 @@ router.get('/', (req, res, next) => {
 router.get('/signup', (req, res, next) => {
   res.render('auth/signup.hbs');
 });
-//FIXME:
 router.post('/signup', (req, res, next) => {
   //get data from the form
   const { name, email, password } = req.body;
@@ -42,7 +41,7 @@ router.post('/signup', (req, res, next) => {
         UserModel.create({ name, email, password: hash })
           .then(result => {
             req.session.logedUser = result;
-            res.redirect('/profile'); //FIXME:
+            res.redirect('/profile/' + result._id);
           })
           .catch(err => {
             next(err);
@@ -92,17 +91,16 @@ router.post('/login', (req, res, next) => {
 });
 
 //SETTING COOKIES
-//REVIEW: validaciones
 const checkLogedInUser = (req, res, next) => {
   if (req.session.logedUser) {
     next();
   } else {
-    res.redirect('/profile/' + result._id);
+    res.redirect('/login');
   }
 };
 
 //PROFILE PAGE
-router.get('/profile/:id', (req, res, next) => {
+router.get('/profile/:id', checkLogedInUser, (req, res, next) => {
   let id = req.params.id;
   UserModel.findById(id)
     .then(result => {
@@ -122,7 +120,6 @@ router.get('/profile/:id', (req, res, next) => {
       next(err);
     });
 });
-//REVIEW:
 router.post('/profile/:id', (req, res, next) => {
   let id = req.params.id;
   const { name, email, oldPassword, newPassword } = req.body;
@@ -131,9 +128,11 @@ router.post('/profile/:id', (req, res, next) => {
       .compare(oldPassword, result.password)
       .then(matches => {
         if (matches) {
+          let salt = bcrypt.genSaltSync(10);
+          let hash = bcrypt.hashSync(newPassword, salt);
           UserModel.findByIdAndUpdate(
             { _id: id },
-            { name, email, password: newPassword }
+            { name, email, password: hash }
           ).then(() => {
             NGOModel.find({ owner: id }).then(resultngos => {
               res.render('profile.hbs', {
@@ -160,7 +159,7 @@ router.post('/profile/:id', (req, res, next) => {
 });
 
 //CREATE NEW NGO
-router.get('/new-ngo/:id', (req, res, next) => {
+router.get('/new-ngo/:id', checkLogedInUser, (req, res, next) => {
   let id = req.params.id;
   UserModel.findById(id)
     .then(result => {
