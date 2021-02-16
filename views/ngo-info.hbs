@@ -5,5 +5,10 @@
   <img src="{{this.images.[0]}}" >
   <p>{{this.information}}</p>
 {{/each}}
-
- <a href="/profile">DONATE</a>
+{{#if logged}}
+<a href="#">Donate</a>
+{{else}}
+<p>Create an account or log In for donate</p>
+<a href="/signup">Create</a>
+<a href="/login">Log IN</a>
+{{/if}}
