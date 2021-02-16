@@ -6,16 +6,21 @@
     <input name="name" type="text" placeholder="johndoe@ngo.com">
     <br>
     <label>Description:</label>
-    <input name="information" type="text" placeholder="Your Password">
+    <input name="information" type="text" placeholder="Your Description">
     <br>
     <label>Image:</label>
-    <input name="images" type="text" placeholder="Your Password">
+    <input name="images" type="text" placeholder="Your Image/s">
+    {{!-- <form action="/ngoimages" method="POST" enctype="multipart/form-data">
+    <input type="file" name="ngoImageUrl" accept="image/png, image/jpg">
+    <br>
+    <button type="submit">Submit</button> --}}
+    </form>
     <br>
     <label>Web-site:</label>
-    <input name="url" type="text" placeholder="Your Password">
+    <input name="url" type="text" placeholder="Your Web-site">
     <br>
-    <label>Category:</label>
-    <input name="key" type="text" placeholder="Your Password">
+    <label>Category: (environment, animals, health or education)</label><br>
+    <input name="key" type="text" placeholder="Your Category">
     <br>
 
     <button type="submit">Create new NGO</button>
