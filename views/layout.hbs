@@ -9,17 +9,19 @@
   </head>
 
   <body>
-    <a href="/"><img src="/images/Logo.png" alt="logo" /></a>
-    <a href="/ngos">NGO's</a>
-
-    {{#if logged}}
-    <a href="/logout">LOGOUT</a>
-    <a href="/profile/{{logged._id}}">My Account</a>
-    {{else}}
-    <a href="/login">LOG IN</a>
-    <a href="/signup">SIGN UP</a>
-    {{/if}}
-
+    <div id="header">
+      <a href="/" class="logo"><img src="/images/Logo.png" alt="logo" class="logo-img" />Global NGO</a>
+      <div class="pages">
+        <a href="/ngos">NGO's</a>
+        {{#if logged}}
+        <a href="/logout">Logout</a>
+        <a href="/profile/{{logged._id}}" >My Account</a>
+        {{else}}
+        <a href="/login">Log In</a>
+        <a href="/signup">Sign Up</a>
+        {{/if}}
+      </div>
+    </div>
     {{{body}}}
 
     <script src="/js/script.js"></script>

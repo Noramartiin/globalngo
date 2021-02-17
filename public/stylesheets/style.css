@@ -1,6 +1,7 @@
 body {
   padding: 50px;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+  margin:0;
 }
 
 a {
@@ -21,4 +22,26 @@ h1 {
   display: none;
 }
 
+.logo-img{
+    height: 50px;
+    width:50px;
+    padding-right: 15px;
+}
+
+.pages{
+  display: flex;
+  justify-content: flex-end;
+}
+.pages a{
+   text-decoration: none;
+   padding:20px;
+}
+#header{
+  display: flex;
+  justify-content: space-between;
+}
+.homepage{
+  margin: 20px;
+  padding-top: 50px;
+}
 /*# sourceMappingURL=style.css.map */
