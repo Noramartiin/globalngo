@@ -16,7 +16,7 @@ const hbs = require('hbs');
 const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most middlewares
-require("./config")(app);
+require('./config')(app);
 
 // default value for title local
 const projectName = 'globalngo';
@@ -25,47 +25,25 @@ const capitalized = string =>
 
 app.locals.title = `${capitalized(projectName)}- Generated with IronGenerator`;
 
-const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
-const mongoose = require("mongoose");
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const mongoose = require('mongoose');
 
 app.use(
   session({
-    secret: "logedUser",
+    secret: 'logedUser',
     saveUninitialized: false,
     resave: false,
     coockie: {
-      maxAge: 60 * 60 * 24 * 7* 1000,
+      maxAge: 60 * 60 * 24 * 7 * 1000,
     },
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       ttl: 24 * 60 * 60,
     }),
   })
-  )
+);
 
-const cloudinary = require("cloudinary").v2;
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const multer = require("multer");
-
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET,
-});
-
-const storage = new CloudinaryStorage({
-  cloudinary,
-  folder: "ngo",
-  allowedFormats: ["jpg", "png"],
-  // params: { resource_type: 'raw' }, => add this is in case you want to upload other type of files, not just images
-  filename: function (req, res, cb) {
-    cb(null, res.originalname);
-  },
-});
-
-module.exports = multer({ storage });
-  
 // 👇 Start handling routes here
 const index = require('./routes/index');
 app.use('/', index);

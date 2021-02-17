@@ -3,8 +3,7 @@ const UserModel = require('../models/User.model.js');
 const NGOModel = require('../models/Ngo.model');
 const bcrypt = require('bcryptjs');
 const { render } = require('../app.js');
-const { populate } = require('../models/User.model.js');
-const uploader = require('../app.js');
+const uploader = require('../middlewares/cloudinary.config.js');
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -223,13 +222,17 @@ router.post('/profile/:id', (req, res, next) => {
 });
 
 //UPLOAD PROFILE IMAGE
-router.post('/upload', uploader.single('imageUrl'), (req, res, next) => {
-  UserModel.findByIdAndUpdate(req.session.logedUser._id, {
-    profileImg: req.file.path,
-  }).then(() => {
-    res.redirect('/profile/' + req.session.logedUser._id);
-  });
-});
+router.post(
+  '/uploadprofile',
+  uploader.single('profileImg'),
+  (req, res, next) => {
+    UserModel.findByIdAndUpdate(req.session.logedUser._id, {
+      profileImg: req.file.path,
+    }).then(() => {
+      res.redirect('/profile/' + req.session.logedUser._id);
+    });
+  }
+);
 
 //EDIT NGO
 router.get('/new-ngo/:id/:idNgo/edit', checkLogedInUser, (req, res, next) => {
@@ -313,12 +316,13 @@ router.post('/new-ngo/:id', (req, res, next) => {
     });
 });
 
-router.post("/ngoimages", uploader.single("ngoImageUrl"), (req, res, next) => {
-  NGOModel.findByIdAndUpdate(req.session.logedUser._id, {$push: {images: req.file.path}})
-  .then(() => {
-    res.redirect("/profile/" + req.session.logedUser._id);
-  });
-});
+// router.post('/ngoimages', uploader.single('ngoImageUrl'), (req, res, next) => {
+//   NGOModel.findByIdAndUpdate(req.session.logedUser._id, {
+//     $push: { images: req.file.path },
+//   }).then(() => {
+//     res.redirect('/profile/' + req.session.logedUser._id);
+//   });
+// });
 
 //DELETE PROFILE
 router.get('/delete-profile/:id', checkLogedInUser, (req, res, next) => {
