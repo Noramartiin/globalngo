@@ -47,7 +47,7 @@
   <div class="div-ngos">
     <p>{{msgnongo}}</p>
     {{#each resultngos}}
-      <img src="{{this.images.[0]}}" alt="img">
+      <img src="{{this.images.[-1]}}" alt="img">
       <p>{{this.name}}</p>
       <a href="/new-ngo/{{this.owner}}/{{this._id}}/edit">Edit</a>
       <a href="/new-ngo/{{this.owner}}/{{this._id}}/delete">Delete</a>

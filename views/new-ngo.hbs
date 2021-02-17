@@ -1,20 +1,16 @@
 <h1>Hello {{result.name}}, you are creating a new NGO</h1>
 
-<form action="/new-ngo/{{result._id}}" method="POST">
+<form action="/new-ngo/{{result._id}}" method="POST" enctype="multipart/form-data">
     <p>{{msg}}</p>
-    <label>Name</label>
+    <br>
+    <label>Name:</label>
     <input name="name" type="text" placeholder="johndoe@ngo.com">
     <br>
     <label>Description:</label>
     <input name="information" type="text" placeholder="Your Description">
     <br>
     <label>Image:</label>
-    <input name="images" type="text" placeholder="Your Image/s">
-    {{!-- <form action="/ngoimages" method="POST" enctype="multipart/form-data">
-    <input type="file" name="ngoImageUrl" accept="image/png, image/jpg">
-    <br>
-    <button type="submit">Submit</button>
-    </form> --}}
+    <input type="file" name="images" accept="image/png, image/jpg">
     <br>
     <label>Web-site:</label>
     <input name="url" type="text" placeholder="Your Web-site">
