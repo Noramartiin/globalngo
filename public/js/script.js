@@ -29,6 +29,7 @@ document.addEventListener(
         divNgos.style.display = 'none';
       }
     });
+    
   },
   false
 );

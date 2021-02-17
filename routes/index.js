@@ -313,6 +313,13 @@ router.post('/new-ngo/:id', (req, res, next) => {
     });
 });
 
+router.post("/ngoimages", uploader.single("ngoImageUrl"), (req, res, next) => {
+  NGOModel.findByIdAndUpdate(req.session.logedUser._id, {$push: {images: req.file.path}})
+  .then(() => {
+    res.redirect("/profile/" + req.session.logedUser._id);
+  });
+});
+
 //DELETE PROFILE
 router.get('/delete-profile/:id', checkLogedInUser, (req, res, next) => {
   let id = req.params.id;
