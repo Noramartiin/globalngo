@@ -229,13 +229,13 @@ router.post("/profile/:id", (req, res, next) => {
 });
 
 //UPLOAD PROFILE IMAGE
-// router.post("/upload", uploader.single("imageUrl"), (req, res, next) => {
-//   UserModel.findByIdAndUpdate(req.session.logedUser._id, {
-//     profileImg: req.file.path,
-//   }).then(() => {
-//     res.redirect("/profile/" + req.session.logedUser._id);
-//   });
-// });
+router.post("/upload", uploader.single("imageUrl"), (req, res, next) => {
+  UserModel.findByIdAndUpdate(req.session.logedUser._id, {
+    profileImg: req.file.path,
+  }).then(() => {
+    res.redirect("/profile/" + req.session.logedUser._id);
+  });
+});
 
 //DELETE PROFILE
 router.get("/delete-profile/:id", checkLogedInUser, (req, res, next) => {
