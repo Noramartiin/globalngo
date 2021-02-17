@@ -23,7 +23,7 @@ const projectName = 'globalngo';
 const capitalized = string =>
   string[0].toUpperCase() + string.slice(1).toLowerCase();
 
-app.locals.title = `${capitalized(projectName)}- Generated with IronGenerator`;
+app.locals.title = `${capitalized(projectName)}`;
 
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);

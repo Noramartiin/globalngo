@@ -4,12 +4,12 @@
   <h3>What type of NGO are you looking for?</h3>
 <select size="1">
   <option value="coleccion.html">Select the type</option>
-  <option value="{{data.key}}">environment</option>
-  <option value="{{data.key}}">animals</option>
-  <option value="{{data.key}}">health</option>
-  <option value="{{data.key}}">education</option>
+  <option value="environment">environment</option>
+  <option value="animals">animals</option>
+  <option value="health">health</option>
+  <option value="education">education</option>
 </select>
-<input type="button" value="Search" onClick="filter()">
+<button type="submit">Filter</button>
 </form>
 
 {{#each data}}

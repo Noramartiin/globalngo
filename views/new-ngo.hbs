@@ -10,19 +10,25 @@
     <br>
     <label>Image:</label>
     <input name="images" type="text" placeholder="Your Image/s">
-    <form action="/ngoimages" method="POST" enctype="multipart/form-data">
+    {{!-- <form action="/ngoimages" method="POST" enctype="multipart/form-data">
     <input type="file" name="ngoImageUrl" accept="image/png, image/jpg">
     <br>
     <button type="submit">Submit</button>
-    </form>
+    </form> --}}
     <br>
     <label>Web-site:</label>
     <input name="url" type="text" placeholder="Your Web-site">
     <br>
     <label>Category: (environment, animals, health or education)</label><br>
-    <input name="key" type="text" placeholder="Your Category">
+    <select name="key" size="1">
+        <option disabled selected>Your Category</option>
+        <option value="environment">environment</option>
+        <option value="animals">animals</option>
+        <option value="health">health</option>
+        <option value="education">education</option>
+    </select>
+ 
     <br>
-
     <button type="submit">Create new NGO</button>
 
 </form>

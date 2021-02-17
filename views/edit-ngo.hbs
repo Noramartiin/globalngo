@@ -19,8 +19,16 @@
     <label>Web-site:</label>
     <input name="url" type="text" value={{nresult.url}}>
     <br>
-    <label>Category:</label>
-    <input name="key" type="text" value={{nresult.key}}>
+    <label>Category: (environment, animals, health or education)</label
+    ><br>
+    <select name="key" size="1">
+        <option disabled selected>Your Category</option>
+        <option value="environment">environment</option>
+        <option value="animals">animals</option>
+        <option value="health">health</option>
+        <option value="education">education</option>
+    </select>
+ 
     <br>
 
     <button type="submit">Edit the NGO</button>
