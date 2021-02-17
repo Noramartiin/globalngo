@@ -16,7 +16,7 @@ router.get("/", (req, res, next) => {
   }
 });
 
-//SIGNIN PAGE
+//SIGNUP PAGE
 router.get("/signup", (req, res, next) => {
   res.render("auth/signup.hbs");
 });
@@ -292,7 +292,6 @@ router.post("/new-ngo/:id", (req, res, next) => {
 router.get("/new-ngo/:id/:idNgo/edit", checkLogedInUser, (req, res, next) => {
   let id = req.params.id;
   let idNgo = req.params.idNgo;
-  // const { name, information, images, url, key } = req.body;
 
   UserModel.findById(id).then((uresult) => {
     NGOModel.findById(idNgo)

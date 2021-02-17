@@ -14,7 +14,7 @@
 
     {{#if logged}}
     <a href="/logout">LOGOUT</a>
-    <a href="/profile">My Account</a>
+    <a href="/profile/"+ {{this._id}}>My Account</a>
     {{else}}
     <a href="/login">LOG IN</a>
     <a href="/signup">SIGN UP</a>
