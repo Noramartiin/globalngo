@@ -1,0 +1,28 @@
+<h1>EDIT PAGE</h1>
+<h1>Hello {{uresult.name}}, you are editing a new NGO</h1>
+<form action="/new-ngo/{{uresult._id}}/{{nresult._id}}/edit" method="POST">
+    <label>Name</label>
+    <input name="name" type="text" value={{nresult.name}}>
+    <br>
+    <label>Description:</label>
+    <input name="information" type="text" value={{nresult.information}}>
+    <br>
+    {{!-- <form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="ngoImageUrl" accept="image/png, image/jpg">
+    <br>
+    <button type="submit">Submit</button>
+    </form>
+    <br> --}}
+    <label>Image:</label>
+    <input name="images" type="text" value={{nresult.images}}>
+    <br>
+    <label>Web-site:</label>
+    <input name="url" type="text" value={{nresult.url}}>
+    <br>
+    <label>Category:</label>
+    <input name="key" type="text" value={{nresult.key}}>
+    <br>
+
+    <button type="submit">Edit the NGO</button>
+
+</form>

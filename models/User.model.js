@@ -15,6 +15,10 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+  profileImg: {
+    type: String,
+    default: "https://www.madd.org/wp-content/uploads/2019/02/blank-profile-picture-973460_640.png",
+  },
 });
 
 //USER MODEL
