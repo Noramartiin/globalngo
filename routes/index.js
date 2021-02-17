@@ -62,7 +62,8 @@ router.post("/signup", (req, res, next) => {
 
 //LOG IN PAGE
 router.get("/login", (req, res, next) => {
-  res.render("auth/login.hbs");
+  // res.render("auth/login.hbs");
+  res.send('hola')
 });
 
 router.post("/login", (req, res, next) => {
