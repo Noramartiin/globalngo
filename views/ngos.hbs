@@ -1,9 +1,10 @@
 <h1>NGOS </h1>
 
-<form>
+<form action="/ngos" method="POST">
   <h3>What type of NGO are you looking for?</h3>
-<select size="1">
-  <option value="coleccion.html">Select the type</option>
+<select name="key" size="1">
+  <option disabled>Select the type</option>
+  <option value="all" selected>All</option>
   <option value="environment">environment</option>
   <option value="animals">animals</option>
   <option value="health">health</option>

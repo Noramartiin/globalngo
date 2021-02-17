@@ -115,6 +115,46 @@ router.get('/ngos', (req, res, next) => {
       });
   }
 });
+router.post('/ngos', (req, res, next) => {
+  const { key } = req.body;
+  if (req.session.logedUser) {
+    if (key == 'all') {
+      NGOModel.find()
+        .then(data => {
+          res.render('ngos.hbs', { data, logged: req.session.logedUser });
+        })
+        .catch(error => {
+          next(error);
+        });
+    } else {
+      NGOModel.find({ key })
+        .then(data => {
+          res.render('ngos.hbs', { data, logged: req.session.logedUser });
+        })
+        .catch(error => {
+          next(error);
+        });
+    }
+  } else {
+    if (key == 'all') {
+      NGOModel.find()
+        .then(data => {
+          res.render('ngos.hbs', { data });
+        })
+        .catch(error => {
+          next(error);
+        });
+    } else {
+      NGOModel.find({ key })
+        .then(data => {
+          res.render('ngos.hbs', { data });
+        })
+        .catch(error => {
+          next(error);
+        });
+    }
+  }
+});
 
 // ONG INFO PAGE
 router.get('/ngo-info/:id', (req, res, next) => {
@@ -277,7 +317,7 @@ router.post(
 );
 
 //DELETE NGO
-router.get('/new-ngo/:id/:idNgo/delete', (req, res, next) => {
+router.get('/new-ngo/:id/:idNgo/delete', checkLogedInUser, (req, res, next) => {
   let id = req.params.id;
   let idNgo = req.params.idNgo;
   NGOModel.findByIdAndDelete(idNgo)
