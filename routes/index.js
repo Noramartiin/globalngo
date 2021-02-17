@@ -3,18 +3,19 @@ const UserModel = require('../models/User.model.js');
 const NGOModel = require('../models/Ngo.model');
 const bcrypt = require('bcryptjs');
 const { render } = require('../app.js');
+const { populate } = require('../models/User.model.js');
+const uploader = require('../app.js');
 
 /* GET home page */
-router.get("/", (req, res, next) => {
+router.get('/', (req, res, next) => {
   if (req.session.logedUser) {
-    logged = req.session.logedUser;
-    res.render("index", { logged });
+    res.render('index', { logged: req.session.logedUser });
   } else {
-    res.render("index");
+    res.render('index');
   }
 });
 
-//SIGNIN PAGE
+//SIGNUP PAGE
 router.get('/signup', (req, res, next) => {
   res.render('auth/signup.hbs');
 });
@@ -96,46 +97,43 @@ router.post('/login', (req, res, next) => {
 });
 
 // ONGS PAGE
-router.get("/ngos", (req, res, next) => {
+router.get('/ngos', (req, res, next) => {
   if (req.session.logedUser) {
-    logged = req.session.logedUser;
     NGOModel.find()
-      .then((data) => {
-        res.render("ngos.hbs", { data, logged });
+      .then(data => {
+        res.render('ngos.hbs', { data, logged: req.session.logedUser });
       })
-      .catch((error) => {
+      .catch(error => {
         next(error);
       });
   } else {
     NGOModel.find()
-      .then((data) => {
-        res.render("ngos.hbs", { data });
+      .then(data => {
+        res.render('ngos.hbs', { data });
       })
-      .catch((error) => {
+      .catch(error => {
         next(error);
       });
   }
 });
 
 // ONG INFO PAGE
-router.get("/ngo-info/:id", (req, res, next) => {
+router.get('/ngo-info/:id', (req, res, next) => {
+  let id = req.params.id;
   if (req.session.logedUser) {
-    let logged = req.session.logedUser;
-    let id = req.params.id;
     NGOModel.findById({ _id: id })
-      .then((result) => {
-        res.render("ngo-info.hbs", { result, logged });
+      .then(result => {
+        res.render('ngo-info.hbs', { result, logged: req.session.logedUser });
       })
-      .catch((err) => {
+      .catch(err => {
         next(err);
       });
   } else {
-    let id = req.params.id;
     NGOModel.findById({ _id: id })
-      .then((result) => {
-        res.render("ngo-info.hbs", { result });
+      .then(result => {
+        res.render('ngo-info.hbs', { result });
       })
-      .catch((err) => {
+      .catch(err => {
         next(err);
       });
   }
@@ -151,8 +149,8 @@ const checkLogedInUser = (req, res, next) => {
 };
 
 //DONATE
-router.get("/donate", checkLogedInUser, (req, res, next) => {
-  res.render("donate.hbs");
+router.get('/donate', checkLogedInUser, (req, res, next) => {
+  res.render('donate.hbs');
 });
 
 //PROFILE PAGE
@@ -161,18 +159,18 @@ router.get('/profile/:id', checkLogedInUser, (req, res, next) => {
   UserModel.findById(id)
     .then(result => {
       NGOModel.find({ owner: id })
-        .then((resultngos) => {
+        .then(resultngos => {
           if (resultngos[0]) {
-            let logged = result;
-            res.render("profile.hbs", {
+            res.render('profile.hbs', {
+              logged: req.session.logedUser,
               result,
-              logged,
               resultngos,
             });
           } else {
-            res.render("profile.hbs", {
+            res.render('profile.hbs', {
+              logged: req.session.logedUser,
               result,
-              msgnongo: "You do not have any NGO yet",
+              msgnongo: 'You do not have any NGO yet',
             });
           }
         })
@@ -187,8 +185,7 @@ router.get('/profile/:id', checkLogedInUser, (req, res, next) => {
 router.post('/profile/:id', (req, res, next) => {
   let id = req.params.id;
   const { name, email, oldPassword, newPassword } = req.body;
-  UserModel.findOne({ _id: id }).then((result) => {
-    let logged = result;
+  UserModel.findOne({ _id: id }).then(result => {
     bcrypt
       .compare(oldPassword, result.password)
       .then(matches => {
@@ -202,7 +199,7 @@ router.post('/profile/:id', (req, res, next) => {
             NGOModel.find({ owner: id }).then(resultngos => {
               res.render('profile.hbs', {
                 result,
-                logged,
+                logged: req.session.logedUser,
                 resultngos,
                 msg: 'You profile has been modified',
               });
@@ -212,7 +209,7 @@ router.post('/profile/:id', (req, res, next) => {
           NGOModel.find({ owner: id }).then(resultngos => {
             res.render('profile.hbs', {
               result,
-              logged,
+              logged: req.session.logedUser,
               resultngos,
               msg: 'You password does not match',
             });
@@ -225,13 +222,67 @@ router.post('/profile/:id', (req, res, next) => {
   });
 });
 
+//UPLOAD PROFILE IMAGE
+router.post('/upload', uploader.single('imageUrl'), (req, res, next) => {
+  UserModel.findByIdAndUpdate(req.session.logedUser._id, {
+    profileImg: req.file.path,
+  }).then(() => {
+    res.redirect('/profile/' + req.session.logedUser._id);
+  });
+});
+
+//EDIT NGO
+router.get('/new-ngo/:id/:idNgo/edit', checkLogedInUser, (req, res, next) => {
+  let id = req.params.id;
+  let idNgo = req.params.idNgo;
+  UserModel.findById(id).then(uresult => {
+    NGOModel.findById(idNgo)
+      .then(nresult => {
+        res.render('edit-ngo.hbs', {
+          uresult,
+          nresult,
+          logged: req.session.logedUser,
+        });
+      })
+      .catch(error => {
+        next(error);
+      });
+  });
+});
+
+router.post('/new-ngo/:id/:idNgo/edit', (req, res, next) => {
+  let id = req.params.id;
+  let idNgo = req.params.idNgo;
+  const { name, information, images, url, key } = req.body;
+  NGOModel.findByIdAndUpdate(idNgo, req.body)
+    .then(() => {
+      res.redirect('/profile/' + id);
+    })
+    .catch(error => {
+      next(error);
+    });
+});
+
+//DELETE NGO
+router.get('/new-ngo/:id/:idNgo/delete', (req, res, next) => {
+  let id = req.params.id;
+  let idNgo = req.params.idNgo;
+  NGOModel.findByIdAndDelete(idNgo)
+    .then(() => {
+      res.redirect('/profile/' + id);
+    })
+    .catch(error => {
+      console.log(idNgo);
+      next(error);
+    });
+});
+
 //CREATE NEW NGO
 router.get('/new-ngo/:id', checkLogedInUser, (req, res, next) => {
   let id = req.params.id;
   UserModel.findById(id)
-    .then((result) => {
-      let logged = result;
-      res.render("new-ngo.hbs", { result, logged });
+    .then(result => {
+      res.render('new-ngo.hbs', { result, logged: req.session.logedUser });
     })
     .catch(err => {
       next(err);
@@ -240,13 +291,14 @@ router.get('/new-ngo/:id', checkLogedInUser, (req, res, next) => {
 router.post('/new-ngo/:id', (req, res, next) => {
   let id = req.params.id;
   const { name, information, images, url, key } = req.body;
-  console.log(name);
   NGOModel.findOne({ name })
     .then(ngo => {
       if (ngo) {
-        console.log(ngo);
-        //FIXME: se quedan guardados los datos anteriores NOTE: TODOS LOS RENDER
-        res.render('new-ngo.hbs', { msg: 'This NGO already exists' });
+        res.render('new-ngo.hbs', {
+          result: req.session.logedUser,
+          logged: req.session.logedUser,
+          msg: 'This NGO already exists',
+        });
       } else {
         NGOModel.create({ name, information, images, url, key, owner: id })
           .then(a => {
@@ -275,7 +327,7 @@ router.get('/delete-profile/:id', checkLogedInUser, (req, res, next) => {
 });
 
 // LOG OUT PAGE
-router.get("/logout", checkLogedInUser, (req, res, next) => {
+router.get('/logout', checkLogedInUser, (req, res, next) => {
   req.session.destroy();
   res.redirect('/');
 });
