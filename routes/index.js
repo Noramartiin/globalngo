@@ -272,7 +272,6 @@ router.get('/new-ngo/:id/:idNgo/delete', (req, res, next) => {
       res.redirect('/profile/' + id);
     })
     .catch(error => {
-      console.log(idNgo);
       next(error);
     });
 });
@@ -302,7 +301,6 @@ router.post('/new-ngo/:id', (req, res, next) => {
       } else {
         NGOModel.create({ name, information, images, url, key, owner: id })
           .then(a => {
-            console.log(a);
             res.redirect('/profile/' + id);
           })
           .catch(err => {
