@@ -2,7 +2,7 @@ document.addEventListener(
   'DOMContentLoaded',
   () => {
     let editInformation = document.querySelector('.edit-profile');
-    let formInformation = document.querySelector('.form-modify');
+    let formInformation = document.querySelector('.display-form-none');
     let deleteInformation = document.querySelector('.delete-profile');
     let divDelete = document.querySelector('.div-delete');
     let editNgos = document.querySelector('.modify-ngos');
@@ -29,7 +29,6 @@ document.addEventListener(
         divNgos.style.display = 'none';
       }
     });
-    
   },
   false
 );

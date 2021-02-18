@@ -13,7 +13,6 @@ body {
   color: 15px;
 } */
 
-
 .div-delete {
   display: none;
 }
@@ -293,23 +292,25 @@ body {
 
 /* PROFILE */
 
+.display-form-none {
+  display: none;
+}
 .form-modify {
-    display: none;
-    /* padding: 30px;
-    background-color: white;
-    display: flex;
-    flex-direction: column; */
+  padding: 30px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
 }
-.form-modify div{
-    display: flex;
-    justify-content: center;
+.form-modify div {
+  display: flex;
+  justify-content: center;
 }
-.form-modify label{
+.form-modify label {
   color: rgba(130, 130, 130, 1);
 }
 
 .form-modify input {
-  width:500px;
+  width: 500px;
   display: flex;
   justify-content: flex-start;
   margin: 0px 10px 20px;
