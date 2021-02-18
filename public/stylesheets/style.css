@@ -290,14 +290,15 @@ body {
   padding: 5px;
   margin: 0px 120px 20px;
 }
+
 /* PROFILE */
 
 .form-modify {
-  display: none;
-    padding: 30px;
+    display: none;
+    /* padding: 30px;
     background-color: white;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; */
 }
 .form-modify div{
     display: flex;
