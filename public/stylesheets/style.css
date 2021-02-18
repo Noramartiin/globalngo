@@ -35,6 +35,9 @@ body {
   align-items: center;
   padding: 30px 80px 0px;
 }
+.logo:hover {
+  color: rgba(76, 153, 200, 1);
+}
 .pages {
   display: flex;
   justify-content: flex-end;
@@ -114,6 +117,9 @@ body {
   width: 200px;
   height: 30px;
   border-color: rgba(130, 130, 130, 1);
+  margin-right: 15px;
+  border-radius: 8px;
+  padding-left: 5px;
 }
 
 .ngo-filter button {
@@ -140,13 +146,16 @@ body {
   width: 100px;
   height: 300px;
 }
+.card a {
+  text-decoration: none;
+  text-align: center;
+}
 .card-img-top {
   width: contain;
   height: contain;
   min-height: 150px;
 }
 .card-body {
-  text-decoration: none;
   color: black;
   display: flex;
   justify-content: center;
