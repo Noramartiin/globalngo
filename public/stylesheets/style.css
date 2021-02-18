@@ -63,7 +63,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 80px;
+  padding: 100px;
 }
 #presentation {
   padding-right: 100px;
@@ -254,7 +254,7 @@ body {
   align-items: center;
   justify-content: center;
   margin: 20px 0;
-  padding: 60px 0 500px;
+  padding: 60px 0 150px;
   background-color: rgba(130, 130, 130, 0.089);
 }
 
@@ -298,7 +298,7 @@ body {
   align-items: center;
   justify-content: center;
   margin: 20px 0;
-  padding: 60px 0 500px;
+  padding: 60px 0 100px;
   background-color: rgba(130, 130, 130, 0.089);
 }
 
@@ -358,6 +358,18 @@ body {
   height: 330px;
   width: 380px;
   display: flex;
+  align-items: center;
+}
+
+/* FOOTER */
+
+.footer{
+  background-color: rgba(76, 153, 200, 1);
+  color: white;
+  height:100px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 /*# sourceMappingURL=style.css.map */
