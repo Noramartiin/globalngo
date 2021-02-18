@@ -2,7 +2,9 @@
 {{#each result}}
   <h2>{{this.key}}</h2>
   <h3>{{this.name}}</h3>
-  <img src="{{this.images.[0]}}" >
+  {{#each this.images}}
+    {{#if @last}}<img src="{{this}}" alt="img"> {{/if}}
+  {{/each}}
   <p>{{this.information}}</p>
 {{/each}}
 {{#if logged}}

@@ -15,7 +15,9 @@
 
 {{#each data}}
   <a href="/ngo-info/{{this._id}}">
-    <img src="{{this.images.[0]}}" >
+   {{#each this.images}}
+    {{#if @last}} <img src="{{this}}" alt="ngo img"> {{/if}}
+   {{/each}}
     <h3>{{this.name}}</h3>
   </a>
 {{/each}}

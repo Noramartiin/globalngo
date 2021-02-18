@@ -1,60 +1,70 @@
-<h1>Profile</h1>
-<h2>My info</h2>
-   <img src="{{result.profileImg}}" alt="profilePic" width="110" height="110" >
+<div class="container-profile">
+  <div class="container-info">
+    <h1>Wellcome!</h1>
+    <h2>Your profile</h2>
+    <img src="{{result.profileImg}}" alt="profilePic" width="110" height="110" >
 
-<form action="/uploadprofile" method="POST" enctype="multipart/form-data">
-    <input type="file" name="profileImg" accept="image/png, image/jpg">
-    <br>
-    <button type="submit">Submit</button>
-</form>
-
-  <h4>Name: {{result.name}}</h3>
-  <h4>Mail: {{result.email}}</h4>
-  <h4>Password: **** </h4>
-
-<div>
-  <p>{{msg}}</p>
-  <button class="edit-profile" href="">Edit your information</button>
-  
-    <form class="form-modify" action="/profile/{{result._id}}" method="POST">
-      <label>Full name:</label>
-      <input name="name" type="text" value="{{result.name}}">
+    <form action="/uploadprofile" method="POST" enctype="multipart/form-data">
+      <input type="file" name="profileImg" accept="image/png, image/jpg">
       <br>
-      <label>Your email:</label>
-      <input name="email" type="email" value="{{result.email}}">
-      <br>
-      <label>Old password:</label>
-      <input name="oldPassword" type="password" placeholder="*********">
-      <br>
-      <label>New password:</label>
-      <input name="newPassword" type="password">
-      <br>
-      <button type="submit">Change</button>
+      <button type="submit">Submit</button>
     </form>
-  
+    <div class="user-info">
+      <h4>Name: <span>{{result.name}}</span></h3>
+      <h4>Mail: <span>{{result.email}}</h4></span></h4>
+      <h4>Password: <span>*********</span> </h4>
+    </div>
+  </div>
 
-</div>
-<div>
-  <button class="delete-profile">Delete your account</button>
-  <div class="div-delete">
-    <p>You are going to delete all your information and the NGOs you have created, BE SURE OF THAT CHAMP!</p>
-    <a href="/delete-profile/{{result._id}}">Delete</a>
+  <div class="box-profile">
+    <div>
+      <button class="modify-ngos nav-profile">Your NGOs</button>
+      <div class="div-ngos">
+        <p>{{msgnongo}}</p>
+        {{#each resultngos}}
+        <div class="container-profile ngos-list">
+          {{#each this.images}}
+            {{#if @last}}<img src="{{this}}" alt="img"> {{/if}}
+          {{/each}}
+            <div class="ngos-list-info">
+            <h3>{{this.name}}</h3>
+            <a class="ngos-list-edit" href="/new-ngo/{{this.owner}}/{{this._id}}/edit">Edit</a>
+            <a class="ngos-list-delete" href="/new-ngo/{{this.owner}}/{{this._id}}/delete">Delete</a>
+            <br>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <a class="btn-create-ngo" href="/new-ngo/{{result._id}}">Creat new NGO</a>
+
+    <div>
+      <p>{{msg}}</p>
+      <button class="edit-profile nav-profile">Edit your information</button>
+      <form class="form-modify" action="/profile/{{result._id}}" method="POST">
+        <label>Full name:</label>
+        <input name="name" type="text" value="{{result.name}}">
+        <br>
+        <label>Your email:</label>
+        <input name="email" type="email" value="{{result.email}}">
+        <br>
+        <label>Old password:</label>
+        <input name="oldPassword" type="password" placeholder="*********">
+        <br>
+        <label>New password:</label>
+        <input name="newPassword" type="password">
+        <br>
+        <button type="submit">Change</button>
+      </form>
+    </div>
+    
+    <div>
+      <button class="delete-profile nav-profile">Delete your account</button>
+      <div class="div-delete">
+        <p><i class="fas fa-exclamation-triangle"></i>You are going to delete all your information and the NGOs you have created, BE SURE OF THAT CHAMP!</p>
+        <a class="delete-account" href="/delete-profile/{{result._id}}">Delete</a>
+      </div>
+    </div>
   </div>
 </div>
-
-<div>
-  <button class="modify-ngos">Your NGOs</button>
-  <div class="div-ngos">
-    <p>{{msgnongo}}</p>
-    {{#each resultngos}}
-      <img src="{{this.images.[-1]}}" alt="img">
-      <p>{{this.name}}</p>
-      <a href="/new-ngo/{{this.owner}}/{{this._id}}/edit">Edit</a>
-      <a href="/new-ngo/{{this.owner}}/{{this._id}}/delete">Delete</a>
-      <br>
-    {{/each}}
-  </div>
-</div>
-
-<a href="/new-ngo/{{result._id}}">Creat new NGO</a>
-
