@@ -343,7 +343,6 @@ router.get('/new-ngo/:id', checkLogedInUser, (req, res, next) => {
 router.post('/new-ngo/:id', uploader.single('images'), (req, res, next) => {
   let id = req.params.id;
   const { name, information, images, url, key } = req.body;
-  console.log(req.body);
   NGOModel.findOne({ name })
     .then(ngo => {
       if (ngo) {
