@@ -42,28 +42,30 @@
     <div>
       <p>{{msg}}</p>
       <button class="edit-profile nav-profile">Edit your information</button>
-      <form class="form-modify" action="/profile/{{result._id}}" method="POST">
-      <div>
-        <label>Full name:</label>
-        <input name="name" type="text" value="{{result.name}}">
+      <div class="display-form-none">
+        <form class="form-modify" action="/profile/{{result._id}}" method="POST">
+          <div>
+            <label>Full name:</label>
+            <input name="name" type="text" value="{{result.name}}">
+          </div>
+            <br>
+          <div>
+            <label>Your email:</label>
+            <input name="email" type="email" value="{{result.email}}">
+          </div> <br>
+          <div>
+            <label>Old password:</label>
+            <input name="oldPassword" type="password" placeholder="*********">
+          </div><br>
+          <div>
+            <label>New password:</label>
+            <input name="newPassword" type="password">
+          </div><br>
+          <div>
+            <button type="submit">Change</button>
+          </div>
+        </form>
       </div>
-        <br>
-         <div>
-        <label>Your email:</label>
-        <input name="email" type="email" value="{{result.email}}">
-       </div> <br>
-        <div>
-        <label>Old password:</label>
-        <input name="oldPassword" type="password" placeholder="*********">
-        </div><br>
-         <div>
-        <label>New password:</label>
-        <input name="newPassword" type="password">
-        </div><br>
-        <div>
-        <button type="submit">Change</button>
-        </div>
-      </form>
     </div>
     
     <div>
