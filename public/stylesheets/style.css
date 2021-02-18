@@ -1,5 +1,5 @@
 body {
-  padding: 10px;
+  padding: 0;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
   margin: 0;
 }
@@ -363,10 +363,10 @@ body {
 
 /* FOOTER */
 
-.footer{
+.footer {
   background-color: rgba(76, 153, 200, 1);
   color: white;
-  height:100px;
+  height: 100px;
   font-size: 20px;
   display: flex;
   justify-content: center;
