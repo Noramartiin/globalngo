@@ -409,6 +409,7 @@ body {
 .container-profile {
   display: flex;
   justify-content: start;
+  padding: 30px 50px 90px;
 }
 .container-info {
   width: 30%;
