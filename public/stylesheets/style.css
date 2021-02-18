@@ -1,16 +1,17 @@
 body {
-  padding: 50px;
+  padding: 10px;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
   margin: 0;
 }
 
-a {
+/* a {
   color: #00b7ff;
-}
+  ;
+} */
 
-h1 {
+/* h1 {
   color: 15px;
-}
+} */
 
 .form-modify {
   display: none;
@@ -21,28 +22,334 @@ h1 {
 .div-ngos {
   display: none;
 }
-
+/* HEADER */
 .logo-img {
-  height: 50px;
-  width: 50px;
-  padding-right: 15px;
+  height: 100px;
+  width: 100px;
 }
-
+.logo {
+  font-size: 50px;
+  text-decoration: none;
+  color: rgba(76, 153, 200, 1);
+  display: flex;
+  align-items: center;
+  padding: 30px 80px 0px;
+}
 .pages {
   display: flex;
   justify-content: flex-end;
 }
 .pages a {
   text-decoration: none;
-  padding: 20px;
+  padding-top: 60px;
+  padding-right: 80px;
+  font-size: 25px;
+  color: rgba(76, 153, 200, 1);
+  display: flex;
 }
 #header {
   display: flex;
   justify-content: space-between;
+  margin-right: 50px;
 }
+
+/* HOME PAGE */
 .homepage {
-  margin: 20px;
+  margin-right: 50px;
   padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px;
+}
+#presentation {
+  padding-right: 100px;
+}
+#presentation h2 {
+  font-size: 40px;
+  color: rgb(244, 162, 97, 1);
+  padding-bottom: 40px;
+}
+#presentation p {
+  font-size: 20px;
+}
+.homepage img {
+  width: 50%;
+  height: 50%;
+}
+
+/* NGO PAGE */
+.ngo-page {
+  margin: 40px;
+}
+
+.ngo-page-header {
+  display: flex;
+}
+.ngo-title {
+  color: rgba(244, 162, 97, 1);
+  font-size: 50px;
+  padding-left: 200px;
+  margin-bottom: 50px;
+}
+
+/* NGO FILTER */
+
+.ngo-filter {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 200px;
+  align-items: center;
+  margin-top: 50px;
+}
+.ngo-filter h3 {
+  display: flex;
+  justify-items: flex-start;
+  font-size: 20px;
+  padding-right: 40px;
+  color: rgba(130, 130, 130, 1);
+}
+
+.ngo-filter select {
+  width: 200px;
+  height: 30px;
+  border-color: rgba(130, 130, 130, 1);
+}
+
+.ngo-filter button {
+  width: 80px;
+  height: 30px;
+  background-color: rgba(76, 153, 200, 1);
+  color: white;
+  border-radius: 4px;
+  border-color: rgba(76, 153, 200, 1);
+  font-size: 18px;
+}
+
+/* CARDS */
+
+.ngo-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.card {
+  margin: 40px;
+  background-color: rgba(246, 246, 246, 1);
+  border-color: black;
+  width: 100px;
+  height: 300px;
+}
+.card-img-top {
+  width: contain;
+  height: contain;
+  min-height: 150px;
+}
+.card-body {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+}
+.card-text {
+  color: rgba(244, 162, 97, 1);
+  font-size: contain;
+}
+
+/* NGO INFO */
+.ngo-info-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.ngo-info {
+  /* margin-right: 80px;
+   margin-top: 50px; */
+  display: flex;
+}
+.ngo-key {
+  display: flex;
+  justify-content: flex-end;
+  color: rgba(130, 130, 130, 1);
+  margin-right: 120px;
+  font-size: 30px;
+  margin-bottom: 50px;
+  /* border-color: rgba(130, 130, 130, 1);; */
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: flex-start;
+  margin: 50px 50px 20px;
+}
+.ngo-info h3 {
+  color: rgba(244, 162, 97, 1);
+  padding-bottom: 20px;
+}
+.ngo-info p {
+  color: rgba(130, 130, 130, 1);
+}
+
+.ngo-img {
+  width: 600px;
+  height: 250px;
+  min-width: 600px;
+  margin: 0 50px;
+}
+
+.donate-button {
+  width: 150px;
+  height: 50px;
+  background-color: rgba(76, 153, 200, 1);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  /* border-color: rgba(76, 153, 200, 1); */
+  font-size: 30px;
+  padding: 5px;
+  text-align: center;
+  margin-left: 28%;
+}
+.information p {
+  color: rgba(130, 130, 130, 1);
+}
+
+.auth-bottons {
+  display: flex;
+}
+
+.auth-bottons a {
+  height: 20px;
+  background-color: rgba(76, 153, 200, 1);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 30px;
+  padding: 30px;
+  text-align: center;
+  margin-left: 28%;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* LOGIN PAGE */
+
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  padding: 60px 0 500px;
+  background-color: rgba(130, 130, 130, 0.089);
+}
+
+.login-box {
+  padding: 60px;
+  /* border-color:  rgba(76, 153, 200, 1); */
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-page h1 {
+  color: rgba(244, 162, 97, 1);
+  padding: 0px 100px 20px;
+}
+
+.login-page label {
+  color: rgba(130, 130, 130, 1);
+  padding: 0px 50px 20px;
+}
+
+.login-page input {
+  display: flex;
+  align-items: flex-start;
+  margin: 0px 50px 20px;
+  padding: 2px 40px 2px;
+}
+
+.login-box button {
+  background-color: rgba(76, 153, 200, 1);
+  border-color: rgba(76, 153, 200, 1);
+  color: white;
+  border-radius: 4px;
+  width: 100px;
+  padding: 5px;
+  margin: 0px 120px 20px;
+}
+/* NEW NGO PAGE */
+.new-ngo-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  padding: 60px 0 500px;
+  background-color: rgba(130, 130, 130, 0.089);
+}
+
+.new-ngo-page-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px;
+  /* border-color:  rgba(76, 153, 200, 1); */
+  background-color: white;
+}
+.new-ngo-page-inside-box {
+  display: flex;
+}
+.new-ngo-page-box h1 {
+  color: rgba(244, 162, 97, 1);
+  padding: 0px 100px 20px;
+}
+
+.new-ngo-page-box label {
+  color: rgba(130, 130, 130, 1);
+  padding-bottom: 20px;
+}
+
+.new-ngo-page-inside-box input {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  margin-right: 100px;
+  padding: 2px 40px 2px;
+}
+
+.new-ngo-page-box button {
+  background-color: rgba(76, 153, 200, 1);
+  border-color: rgba(76, 153, 200, 1);
+  color: white;
+  border-radius: 4px;
+  width: 230px;
+  padding: 5px;
+  margin-top: 30px;
+  margin-left: 70px;
+}
+.right-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 5px;
+}
+.new-ngo-page-box select {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding: 2px 60px 2px;
+  color: rgba(130, 130, 130, 1);
+}
+.description {
+  height: 330px;
+  width: 380px;
+  display: flex;
+  align-items: center;
 }
 /*# sourceMappingURL=style.css.map */
 

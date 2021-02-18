@@ -1,16 +1,32 @@
-<h1>NGOS INFO</h1>
-{{#each result}}
-  <h2>{{this.key}}</h2>
-  <h3>{{this.name}}</h3>
-  {{#each this.images}}
-    {{#if @last}}<img src="{{this}}" alt="img"> {{/if}}
-  {{/each}}
-  <p>{{this.information}}</p>
-{{/each}}
-{{#if logged}}
-<a href="#">Donate</a>
-{{else}}
-<p>Create an account or log In for donate</p>
-<a href="/signup">Create</a>
-<a href="/login">Log IN</a>
-{{/if}}
+{{!-- <h1>NGOS INFO</h1> --}}
+
+
+  {{!-- {{#each result}} --}}
+<div class="ngo-info-page">
+  <h2 class="ngo-key">{{result.key}}</h2>
+    <div class="ngo-info">
+      <div class="information">
+        <h3>{{result.name}}</h3>
+         <p>{{result.information}}</p>
+      </div>
+      {{#each result.images}}
+      {{#if @last}}
+      <img class="ngo-img"src="{{this}}" alt="img">
+      {{/if}}
+     {{/each}}
+
+    </div>
+  {{!-- {{/each}} --}}
+
+  {{#if logged}}
+  <a href="#" class="donate-button">Donate</a>
+  {{else}}
+  <div class="information">
+    <p>Create an account or log In for donate</p>
+    <div class="auth-bottons">
+      <a href="/signup">Create Account</a>
+      <a href="/login">Log IN</a>
+    </div>
+  </div>
+  {{/if}}
+</div>

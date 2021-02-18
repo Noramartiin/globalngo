@@ -1,30 +1,37 @@
-<h1>Hello {{result.name}}, you are creating a new NGO</h1>
-
-<form action="/new-ngo/{{result._id}}" method="POST" enctype="multipart/form-data">
-    <p>{{msg}}</p>
-    <br>
-    <label>Name:</label>
-    <input name="name" type="text" placeholder="johndoe@ngo.com">
-    <br>
-    <label>Description:</label>
-    <input name="information" type="text" placeholder="Your Description">
-    <br>
-    <label>Image:</label>
-    <input type="file" name="images" accept="image/png, image/jpg">
-    <br>
-    <label>Web-site:</label>
-    <input name="url" type="text" placeholder="Your Web-site">
-    <br>
-    <label>Category: (environment, animals, health or education)</label><br>
-    <select name="key" size="1">
-        <option disabled selected>Your Category</option>
-        <option value="environment">environment</option>
-        <option value="animals">animals</option>
-        <option value="health">health</option>
-        <option value="education">education</option>
-    </select>
- 
-    <br>
-    <button type="submit">Create new NGO</button>
-
-</form>
+<div class="new-ngo-page">
+    <div class="new-ngo-page-box">
+    <h1>Hello {{result.name}}, you are creating a new NGO</h1>
+    
+    <form action="/new-ngo/{{result._id}}" method="POST" enctype="multipart/form-data">
+        <div class="new-ngo-page-inside-box">
+            <div>
+                <p>{{msg}}</p>
+                <label>Name:</label>
+                <input name="name" type="text" placeholder="Name of the NGO">
+                <br>
+                <label>Image:</label>
+                <input type="file" name="images" accept="image/png, image/jpg">
+                <br>
+                <label>Web-site:</label>
+                <input name="url" type="text" placeholder="Your Web-site">
+                <br>
+                <label>Category: </label><br>
+                <select name="key" size="1">
+                    <option disabled selected>Your Category</option>
+                    <option value="environment">environment</option>
+                    <option value="animals">animals</option>
+                    <option value="health">health</option>
+                    <option value="education">education</option>
+                </select>
+            </div>
+            <div class="right-side">
+                <label >Description:</label>
+                <textarea name="information" type="text" placeholder="Your Description" class="description"></textarea>
+                <button type="submit">Create new NGO</button>
+            </div>
+        </div>
+        <br>
+        
+    </form>
+    </div>
+</div>
