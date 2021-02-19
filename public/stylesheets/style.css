@@ -557,6 +557,9 @@ h1 {
 
 /* FOOTER */
 .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   background-color: rgba(76, 153, 200, 1);
   color: white;
   height: 100px;

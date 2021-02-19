@@ -355,7 +355,7 @@ router.post('/new-ngo/:id', uploader.single('images'), (req, res, next) => {
         NGOModel.create({
           name,
           information,
-          $push: { images: req.file.path },
+          images: [req.file.path],
           url,
           key,
           owner: id,
