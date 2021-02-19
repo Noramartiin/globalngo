@@ -1,9 +1,7 @@
 <div class="login-page">
-    
-    <div class="login-box">
     <h1>LOG IN</h1>
-    <form action="/login" method="POST">
 
+    <form action="/login" method="POST">
         <label>Your email:</label>
         <input name="email" type="email" placeholder="johndoe@ngo.com">
         <br>
@@ -12,9 +10,9 @@
         <br>
         <button type="submit">Log In</button>
     </form> 
-       {{#if msg}}
+
+    {{#if msg}}
         <div class='error'>{{msg}}</div>
     {{/if}}
-</div>
 
 </div>

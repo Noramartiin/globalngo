@@ -1,34 +1,34 @@
+<h1>You can find your NGO here!</h1>
 <div class="ngo-page">
-  {{!-- <div class="ngo-page-header"> --}}
-   <h1 class="ngo-title">You can find your NGO here! </h1>  
-    <form action="/ngos" method="POST" class="ngo-filter">
-      <h3>What type of NGO are you looking for?</h3>
+  <form action="/ngos" method="POST" class="ngo-filter">
+    <h3>What type of NGO are you looking for?</h3>
+    <div>
       <select name="key" size="1">
         <option disabled>Select the type</option>
         <option value="all" selected>All</option>
-        <option value="environment">environment</option>
-        <option value="animals">animals</option>
-        <option value="health">health</option>
-        <option value="education">education</option>
+        <option value="environment">Environment</option>
+        <option value="animals">Animals</option>
+        <option value="health">Health</option>
+        <option value="education">Education</option>
       </select>
-      <button type="submit" >Filter</button>
-    </form>
-   
-  {{!-- </div> --}}
-  <div class="ngo-card">
-  {{#each data}}
-  <div class="card" style="width: 18rem;">
-    <a href="/ngo-info/{{this._id}}">
-       {{#each this.images}}
-        {{#if @last}}
-      <img class="card-img-top" src="{{this}}" alt="ngo img"> 
-      {{/if}}
-       {{/each}}
-      <div class="card-body">
-        <h3 class="card-text">{{this.name}}</h3>
-      </div>
-    </a>
-  </div>
-  {{/each}}
+      <button type="submit">Filter</button>
     </div>
- </div>
+  </form>
+
+  <div class="ngo-card">
+    {{#each data}}
+    <div class="card" style="width: 18rem">
+      <a href="/ngo-info/{{ this._id }}">
+        {{#each this.images}}
+        {{#if @last}}
+        <img class="card-img-top" src="{{ this }}" alt="ngo img" />
+        {{/if}}
+        {{/each}}
+        <div class="card-body">
+          <h3 class="card-text">{{ this.name }}</h3>
+        </div>
+      </a>
+    </div>
+    {{/each}}
+  </div>
+</div>

@@ -1,21 +1,20 @@
 <div class="login-page">
-<div class="login-box">
-<h1>SIGN UP</h1>
+    <h1>SIGN UP</h1>
 
-<form action="/signup" method="POST">
-    <label>Full name:</label>
-    <input name="name" type="text" placeholder="John Doe">
-    <br>
-    <label>Your email:</label>
-    <input name="email" type="email" placeholder="johndoe@ngo.com">
-    <br>
-    <label>Password:</label>
-    <input name="password" type="password" placeholder="Your Password">
-    <br>
-    <button type="submit">Sign Up</button>
-</form>
-</div>
-{{#if msg}}
-    <div class='error'>{{msg}}</div>
-{{/if}}
+    <form action="/signup" method="POST">
+        <label>Full name:</label>
+        <input name="name" type="text" placeholder="John Doe">
+        <br>
+        <label>Your email:</label>
+        <input name="email" type="email" placeholder="johndoe@ngo.com">
+        <br>
+        <label>Password:</label>
+        <input name="password" type="password" placeholder="Your Password">
+        <br>
+        <button type="submit">Sign Up</button>
+    </form>
+
+    {{#if msg}}
+        <div class='error'>{{msg}}</div>
+    {{/if}}
 </div>

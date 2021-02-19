@@ -1,22 +1,13 @@
-{{!-- <h1>NGOS INFO</h1> --}}
 
+<h1>{{result.name}}</h1>
+<p class="p-info">{{result.information}}</p>
 
-  {{!-- {{#each result}} --}}
-<div class="ngo-info-page">
-  {{!-- <h2 class="ngo-key">{{result.key}}</h2> --}}
-    <div class="ngo-info">
-      <div class="information">
-        <h3>{{result.name}}</h3>
-         <p>{{result.information}}</p>
-      </div>
-      {{#each result.images}}
-      {{#if @last}}
-      <img class="ngo-img"src="{{this}}" alt="img">
-      {{/if}}
-     {{/each}}
-
-    </div>
-  {{!-- {{/each}} --}}
+<div class="ngo-info">
+  {{#each result.images}}
+  {{#if @last}}
+    <img src="{{this}}"alt="img">
+  {{/if}}
+ {{/each}}
 
   {{#if logged}}
   <a href="#" class="donate-button">Donate</a>
@@ -30,3 +21,4 @@
   </div>
   {{/if}}
 </div>
+
