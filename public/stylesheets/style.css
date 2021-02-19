@@ -557,9 +557,6 @@ h1 {
 
 /* FOOTER */
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
   background-color: rgba(76, 153, 200, 1);
   color: white;
   height: 100px;
@@ -567,4 +564,11 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+@media (min-width: 768px) {
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
 }
