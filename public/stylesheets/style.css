@@ -567,7 +567,7 @@ h1 {
 }
 @media (min-width: 768px) {
   .footer {
-    position: relative;
+    position: fixed;
     bottom: 0;
     width: 100%;
   }
