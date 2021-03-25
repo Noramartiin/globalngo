@@ -7,10 +7,7 @@ This app is a platform for unifying worldwide NGOs and help them to make their w
 
 In this app you'll find all the organizations that people posted and are going to be able to filter them according to the their main aim. For posting a new NGO the user will have to log in, after that their will be able to managed the post from their profile page.
 
-<br/>
-<br/>
 <img src='./public/images/APP.png' style='width: 400px; height:200px; margin-left:15%'>
-<br/>
 
 ## MVP
 
