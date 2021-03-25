@@ -21,13 +21,13 @@ If you have an account:
 - The user can create, edit or delete as many NGO as they want.
 
 
-## GAME
+## Website
 
 SEE THE APP:
 
 https://globalngo.herokuapp.com/
 
-## BUILT WITH
+## Built with
 
 - NodeJs
 - CSS3
